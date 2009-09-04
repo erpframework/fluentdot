@@ -3,3 +3,4 @@
 = Under Construction =
 
 http://fluentdot.googlecode.com/svn/wikicontent/Images/rhanekom.jpg
+http://fluentdot.googlecode.com/svn/wiki/Images/rhanekom.jpg
