@@ -1,0 +1,15 @@
+#summary ${DemoName}
+
+= Description =
+
+${DemoDescription}
+
+= Image Output =
+
+http://code.google.com/p/fluentdot/wiki/Images/${ImageFileName}
+
+= Dot Produced =
+
+{{{
+${Dot}
+}}}
