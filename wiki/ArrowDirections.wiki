@@ -6,7 +6,7 @@ Demo of the different arrow directions that dot supports.
 
 = Image Output =
 
-http://fluentdot.googlecode.com/svn/wiki/Images/ArrowDirections.gif
+http://fluentdot.googlecode.com/svn/wiki/Images/ArrowDirections.png
 
 = Dot Produced =
 
