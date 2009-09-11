@@ -4,6 +4,10 @@
 
 Demo of the different arrow directions that dot supports.
 
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoArrowDirections.png
+
 = Code =
 
 {{{
@@ -36,10 +40,6 @@ Demo of the different arrow directions that dot supports.
                                });
 
 }}}
-
-= Image Output =
-
-http://fluentdot.googlecode.com/svn/wiki/Images/ArrowDirections.png
 
 = Dot Produced =
 
