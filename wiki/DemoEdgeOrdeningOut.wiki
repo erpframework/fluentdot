@@ -1,0 +1,69 @@
+#summary Edge Ordering Out
+
+= Description =
+
+A demo of the orderining the graph edges out.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoEdgeOrdeningOut.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                                   nodes.WithName("e");
+                                   nodes.WithName("f");
+                                   nodes.WithName("g");
+                                   nodes.WithName("h");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d");
+                                   edges.From.NodeWithName("b").To.NodeWithName("e");
+                                   edges.From.NodeWithName("e").To.NodeWithName("g");
+                                   edges.From.NodeWithName("e").To.NodeWithName("f");
+                                   edges.From.NodeWithName("g").To.NodeWithName("h");
+                               })
+                .WithEdgeOrdering(Ordering.Out)
+                .WithLabel("Out Ordering of edges");
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [ordering="out", label="Out Ordering of edges"];
+
+
+
+"a";
+"b";
+"c";
+"d";
+"e";
+"f";
+"g";
+"h";
+
+"a" -> "b";
+"a" -> "c";
+"b" -> "c";
+"c" -> "d";
+"b" -> "e";
+"e" -> "g";
+"e" -> "f";
+"g" -> "h";
+
+}
+}}}

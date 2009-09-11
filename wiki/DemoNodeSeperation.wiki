@@ -1,0 +1,55 @@
+#summary Node Seperation
+
+= Description =
+
+A demo of setting the mimimum node seperation.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeSeperation.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                                   nodes.WithName("e");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d");
+                                   edges.From.NodeWithName("c").To.NodeWithName("e");
+                               })
+                .WithLabel("Minimum Node Seperation of 2 inches.")
+                .WithMinimumNodeSeperation(2);
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [label="Minimum Node Seperation of 2 inches.", nodesep=2];
+
+
+
+"a";
+"b";
+"c";
+"d";
+"e";
+
+"a" -> "b";
+"a" -> "c";
+"c" -> "d";
+"c" -> "e";
+
+}
+}}}

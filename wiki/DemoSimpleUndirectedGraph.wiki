@@ -1,0 +1,51 @@
+#summary Simple Undirected Graph
+
+= Description =
+
+An illustration of a simple undirected graph.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoSimpleUndirectedGraph.png
+
+= Code =
+
+{{{
+            return Fluently.CreateUndirectedGraph()
+                .Nodes.Add(x =>
+                               {
+                                   x.WithName("A");
+                                   x.WithName("B");
+                                   x.WithName("C");
+                                   x.WithName("D");
+                               }
+                )
+                .Edges.Add(x =>
+                               {
+                                   x.From.NodeWithName("A").To.NodeWithName("B");
+                                   x.From.NodeWithName("A").To.NodeWithName("C");
+                                   x.From.NodeWithName("B").To.NodeWithName("C");
+                                   x.From.NodeWithName("B").To.NodeWithName("D");
+                               }
+                );
+
+}}}
+
+= Dot Produced =
+
+{{{
+graph "UndirectedGraph" {
+
+
+"A";
+"B";
+"C";
+"D";
+
+"A" -- "B";
+"A" -- "C";
+"B" -- "C";
+"B" -- "D";
+
+}
+}}}

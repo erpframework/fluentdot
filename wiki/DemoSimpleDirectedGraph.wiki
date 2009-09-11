@@ -1,0 +1,51 @@
+#summary Simple Directed Graph
+
+= Description =
+
+An illustration of a simple directed graph.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoSimpleDirectedGraph.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(x =>
+                               {
+                                   x.WithName("A");
+                                   x.WithName("B");
+                                   x.WithName("C");
+                                   x.WithName("D");
+                               }
+                )
+                .Edges.Add(x =>
+                               {
+                                   x.From.NodeWithName("A").To.NodeWithName("B");
+                                   x.From.NodeWithName("A").To.NodeWithName("C");
+                                   x.From.NodeWithName("B").To.NodeWithName("C");
+                                   x.From.NodeWithName("B").To.NodeWithName("D");
+                               }
+                );
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+
+
+"A";
+"B";
+"C";
+"D";
+
+"A" -> "B";
+"A" -> "C";
+"B" -> "C";
+"B" -> "D";
+
+}
+}}}

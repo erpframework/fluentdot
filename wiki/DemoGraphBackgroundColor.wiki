@@ -1,0 +1,55 @@
+#summary Graph Background Color
+
+= Description =
+
+An illustration of the background color functionality in a graph.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoGraphBackgroundColor.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(x =>
+                               {
+                                   x.WithName("a");
+                                   x.WithName("b");
+                                   x.WithName("c");
+                                   x.WithName("d");
+                                   x.WithName("e");
+                               }
+                )
+                .Edges.Add(x =>
+                               {
+                                   x.From.NodeWithName("a").To.NodeWithName("b");
+                                   x.From.NodeWithName("a").To.NodeWithName("c");
+                                   x.From.NodeWithName("c").To.NodeWithName("d");
+                                   x.From.NodeWithName("b").To.NodeWithName("d");
+                               }
+                ).WithBackgroundColor(Color.SlateBlue);
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [bgcolor="#6a5acd"];
+
+
+
+"a";
+"b";
+"c";
+"d";
+"e";
+
+"a" -> "b";
+"a" -> "c";
+"c" -> "d";
+"b" -> "d";
+
+}
+}}}

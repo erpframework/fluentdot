@@ -1,0 +1,53 @@
+#summary Graph Ratio
+
+= Description =
+
+A demo of applying ratio to a graph.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoGraphRatio.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d");
+                               }
+                )
+                .WithRatio(5);
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [ratio=5];
+
+
+
+"a";
+"b";
+"c";
+"d";
+
+"a" -> "b";
+"a" -> "c";
+"b" -> "c";
+"c" -> "d";
+
+}
+}}}

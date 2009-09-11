@@ -1,0 +1,57 @@
+#summary Graph Rotation
+
+= Description =
+
+A demo of how dot can rotate a graph.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoLandscapeGraph.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("a").To.NodeWithName("d");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c");
+                                   edges.From.NodeWithName("b").To.NodeWithName("d");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d");
+                               })
+                .WithLabel("Landscape Graph")
+                .RenderLandscape();
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [label="Landscape Graph", rotate=90];
+
+
+
+"a";
+"b";
+"c";
+"d";
+
+"a" -> "b";
+"a" -> "c";
+"a" -> "d";
+"b" -> "c";
+"b" -> "d";
+"c" -> "d";
+
+}
+}}}

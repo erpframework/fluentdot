@@ -1,0 +1,70 @@
+#summary Label Placements
+
+= Description =
+
+A demo of the different label placement options available.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoLabelPlacements.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a").WithLabelLocation(Location.Bottom).WithLabel("Location - Bottom").WithHeight(1).WithWidth(2);
+                                   nodes.WithName("b").DoNotJustify().WithLabel(@"Label\nNot\nJustified");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d").WithLabelLocation(Location.Top).WithLabel("Location - Top").WithHeight(1).WithWidth(2);
+                                   nodes.WithName("e").DoNotJustify().WithLabel(@"Label\nNot\nJustified");
+                                   nodes.WithName("f").WithLabelLocation(Location.Bottom).WithLabel("Location - Bottom").WithHeight(1).WithWidth(2);
+                                   nodes.WithName("g").WithLabelLocation(Location.Top).WithLabel("Location - Top").WithHeight(1).WithWidth(2); ;
+                                   nodes.WithName("h");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d").DoNotJustify().WithLabel(@"Label\nNot\nJustified");
+                                   edges.From.NodeWithName("b").To.NodeWithName("e");
+                                   edges.From.NodeWithName("e").To.NodeWithName("f").DoNotJustify().WithLabel(@"Label\nNot\nJustified");
+                                   edges.From.NodeWithName("e").To.NodeWithName("g");
+                                   edges.From.NodeWithName("g").To.NodeWithName("h");
+                               })
+                .WithLabel("Bottom Right Graph Label")
+                .WithLabelJustification(Justification.Right)
+                .WithLabelLocation(Location.Bottom);
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [label="Bottom Right Graph Label", labeljust="r", labelloc="b"];
+
+
+
+"a" [labelloc="b", label="Location - Bottom", height=1, width=2];
+"b" [nojustify="true", label="Label\nNot\nJustified"];
+"c";
+"d" [labelloc="t", label="Location - Top", height=1, width=2];
+"e" [nojustify="true", label="Label\nNot\nJustified"];
+"f" [labelloc="b", label="Location - Bottom", height=1, width=2];
+"g" [labelloc="t", label="Location - Top", height=1, width=2];
+"h";
+
+"a" -> "b";
+"a" -> "c";
+"b" -> "c";
+"c" -> "d" [nojustify="true", label="Label\nNot\nJustified"];
+"b" -> "e";
+"e" -> "f" [nojustify="true", label="Label\nNot\nJustified"];
+"e" -> "g";
+"g" -> "h";
+
+}
+}}}

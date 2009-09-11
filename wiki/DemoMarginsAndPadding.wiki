@@ -1,0 +1,67 @@
+#summary Margins and Padding
+
+= Description =
+
+A demo of graph and node margins and padding.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoMarginsAndPadding.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b").WithLabelMargin(0.5f, 0.5f).WithLabel("0.5 Point Margin");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                                   nodes.WithName("e").WithLabelMargin(1, 1).WithLabel("1 Point Margin");
+                                   nodes.WithName("f");
+                                   nodes.WithName("g").WithLabelMargin(2, 2).WithLabel("2 Point Margin");
+                                   nodes.WithName("h");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c");
+                                   edges.From.NodeWithName("c").To.NodeWithName("e");
+                                   edges.From.NodeWithName("e").To.NodeWithName("f");
+                                   edges.From.NodeWithName("e").To.NodeWithName("g");
+                               })
+                .WithBackgroundColor(Color.Gainsboro)
+                .WithLabel("2 Point Graph Margin, 1 Inch Margin Around Graph")
+                .WithMargin(2, 2)
+                .WithPadding(1, 1);
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [bgcolor="#dcdcdc", label="2 Point Graph Margin, 1 Inch Margin Around Graph", margin="2.00,2.00", pad=1.00,1.00];
+
+
+
+"a";
+"b" [margin="0.50,0.50", label="0.5 Point Margin"];
+"c";
+"d";
+"e" [margin="1.00,1.00", label="1 Point Margin"];
+"f";
+"g" [margin="2.00,2.00", label="2 Point Margin"];
+"h";
+
+"a" -> "b";
+"a" -> "c";
+"b" -> "c";
+"c" -> "e";
+"e" -> "f";
+"e" -> "g";
+
+}
+}}}

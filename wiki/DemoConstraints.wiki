@@ -1,0 +1,66 @@
+#summary Constraints
+
+= Description =
+
+A demo of not applying constraints to edges.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoConstraints.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                                   nodes.WithName("e");
+                                   nodes.WithName("f");
+                                   nodes.WithName("g");
+                                   nodes.WithName("h");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c").DoNotConstrainNodes().WithLabel("Not Constrained");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d").DoNotConstrainNodes().WithLabel("Not Constrained");
+                                   edges.From.NodeWithName("b").To.NodeWithName("e");
+                                   edges.From.NodeWithName("e").To.NodeWithName("f").WithMinimumLength(2).WithLabel("Minimum Length : 2");
+                                   edges.From.NodeWithName("e").To.NodeWithName("g").WithMinimumLength(3).WithLabel("Minimum Length : 3");
+                                   edges.From.NodeWithName("g").To.NodeWithName("h").DoNotConstrainNodes().WithLabel("Not Constrained");
+                               }
+                );
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+
+
+"a";
+"b";
+"c";
+"d";
+"e";
+"f";
+"g";
+"h";
+
+"a" -> "b";
+"a" -> "c";
+"b" -> "c" [constraint=false, label="Not Constrained"];
+"c" -> "d" [constraint=false, label="Not Constrained"];
+"b" -> "e";
+"e" -> "f" [minlen=2, label="Minimum Length : 2"];
+"e" -> "g" [minlen=3, label="Minimum Length : 3"];
+"g" -> "h" [constraint=false, label="Not Constrained"];
+
+}
+}}}

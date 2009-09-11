@@ -1,0 +1,77 @@
+#summary Edge Head and Tail Labels
+
+= Description =
+
+A demo of applying different parameters to edge head and tail labels.
+
+= Graph =
+
+http://fluentdot.googlecode.com/svn/wiki/Images/DemoEdgeLabels.png
+
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                                   nodes.WithName("e");
+                                   nodes.WithName("f");
+                                   nodes.WithName("g");
+                                   nodes.WithName("h");
+                                   nodes.WithName("i");
+                                   nodes.WithName("j");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b").WithLabelAngle(100).WithTailLabel("Angle : 100");
+                                   edges.From.NodeWithName("a").To.NodeWithName("c").WithLabelAngle(-100).WithHeadLabel("Angle : -100");
+                                   edges.From.NodeWithName("b").To.NodeWithName("c").FloatLabel().WithLabel("Floating Label");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d").WithLabelDistance(5).WithHeadLabel("Distance : 50");
+                                   edges.From.NodeWithName("b").To.NodeWithName("e").WithLabelDistance(0.5).WithTailLabel("Distance : 0.5");
+                                   edges.From.NodeWithName("e").To.NodeWithName("f").WithLabelFontColor(Color.Blue).WithLabelFontSize(28).WithLabelFontName("Times-Roman").WithHeadLabel("Blue Times-Roman 28 Point");
+                                   edges.From.NodeWithName("e").To.NodeWithName("g").FloatLabel().WithLabel("Floating Label");
+                                   edges.From.NodeWithName("g").To.NodeWithName("h").WithLabelFontColor(Color.Red).WithLabelFontSize(7).WithLabelFontName("Helvetica").WithTailLabel("Red Helvetica 14 Point");
+                                   edges.From.NodeWithName("g").To.NodeWithName("i").Decorate().WithLabel("Decorated Label");
+                                   edges.From.NodeWithName("e").To.NodeWithName("j").Decorate().WithLabel("Decorated Label");
+                               }
+                )
+                .WithMinimumNodeSeperation(2);
+
+}}}
+
+= Dot Produced =
+
+{{{
+digraph "DirectedGraph" {
+graph [nodesep=2];
+
+
+
+"a";
+"b";
+"c";
+"d";
+"e";
+"f";
+"g";
+"h";
+"i";
+"j";
+
+"a" -> "b" [labelangle=100, taillabel="Angle : 100"];
+"a" -> "c" [labelangle=-100, headlabel="Angle : -100"];
+"b" -> "c" [labelfloat="true", label="Floating Label"];
+"c" -> "d" [labeldistance=5, headlabel="Distance : 50"];
+"b" -> "e" [labeldistance=0.5, taillabel="Distance : 0.5"];
+"e" -> "f" [labelfontcolor="#0000ff", labelfontsize=28, labelfontname="Times-Roman", headlabel="Blue Times-Roman 28 Point"];
+"e" -> "g" [labelfloat="true", label="Floating Label"];
+"g" -> "h" [labelfontcolor="#ff0000", labelfontsize=7, labelfontname="Helvetica", taillabel="Red Helvetica 14 Point"];
+"g" -> "i" [decorate=true, label="Decorated Label"];
+"e" -> "j" [decorate=true, label="Decorated Label"];
+
+}
+}}}
