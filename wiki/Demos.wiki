@@ -7,48 +7,48 @@ These samples are exported from the FluentDot.Samples application - for the full
 
 = Simple Graphs =
 
-* [DemoSimpleDirectedGraph Simple Directed Graph]
-* [DemoSimpleUndirectedGraph Simple Undirected Graph]
+  * [DemoSimpleDirectedGraph Simple Directed Graph]
+  * [DemoSimpleUndirectedGraph Simple Undirected Graph]
 
 
 = Visual Elements =
 
-* [DemoArrowDirections Arrow Directions]
-* [DemoArrowSizes Arrow Sizes]
-* [DemoArrowShapes Basic DOT Arrow Shapes]
-* [DemoArrowShapeModifiers DOT Arrow Modifiers]
-* [DemoCompositeArrowShapes DOT Composite Arrow Shapes]
-* [DemoEdgeLabels Edge Head and Tail Labels]
-* [DemoEdgeStyles Edge Styles]
-* [DemoFonts Font Colors, Sizes, and Names]
-* [DemoGraphBackgroundColor Graph Background Color]
-* [DemoGraphDefaults Graph Defaults]
-* [DemoNodeAndEdgeColors Node and Edge Colors]
-* [DemoNodeDistortion Node Distortion]
-* [DemoNodeImages Node Images]
-* [DemoNodeShapes Node Shapes]
-* [DemoNodeSizes Node Sizing]
-* [DemoNodeStyles Node Styles]
-* [DemoPenModifiers Pen Modifiers]
+  * [DemoArrowDirections Arrow Directions]
+  * [DemoArrowSizes Arrow Sizes]
+  * [DemoArrowShapes Basic DOT Arrow Shapes]
+  * [DemoArrowShapeModifiers DOT Arrow Modifiers]
+  * [DemoCompositeArrowShapes DOT Composite Arrow Shapes]
+  * [DemoEdgeLabels Edge Head and Tail Labels]
+  * [DemoEdgeStyles Edge Styles]
+  * [DemoFonts Font Colors, Sizes, and Names]
+  * [DemoGraphBackgroundColor Graph Background Color]
+  * [DemoGraphDefaults Graph Defaults]
+  * [DemoNodeAndEdgeColors Node and Edge Colors]
+  * [DemoNodeDistortion Node Distortion]
+  * [DemoNodeImages Node Images]
+  * [DemoNodeShapes Node Shapes]
+  * [DemoNodeSizes Node Sizing]
+  * [DemoNodeStyles Node Styles]
+  * [DemoPenModifiers Pen Modifiers]
 
 
 = Layout =
 
-* [DemoClusters Clusters]
-* [DemoConstraints Constraints]
-* [DemoEdgeOrdeningIn Edge Ordering In]
-* [DemoEdgeOrdeningOut Edge Ordering Out]
-* [DemoGraphRatio Graph Ratio]
-* [DemoLandscapeGraph Graph Rotation]
-* [DemoLabelPlacements Label Placements]
-* [DemoMarginsAndPadding Margins and Padding]
-* [DemoNodeOrientation Node Orientation]
-* [DemoNodeSeperation Node Seperation]
-* [DemoRecords Records]
-* [DemoSubGraphsAndRanks Sub Graphs and Ranks]
+  * [DemoClusters Clusters]
+  * [DemoConstraints Constraints]
+  * [DemoEdgeOrdeningIn Edge Ordering In]
+  * [DemoEdgeOrdeningOut Edge Ordering Out]
+  * [DemoGraphRatio Graph Ratio]
+  * [DemoLandscapeGraph Graph Rotation]
+  * [DemoLabelPlacements Label Placements]
+  * [DemoMarginsAndPadding Margins and Padding]
+  * [DemoNodeOrientation Node Orientation]
+  * [DemoNodeSeperation Node Seperation]
+  * [DemoRecords Records]
+  * [DemoSubGraphsAndRanks Sub Graphs and Ranks]
 
 
 = API =
 
-* [DemoConventions Conventions]
+  * [DemoConventions Conventions]
 
