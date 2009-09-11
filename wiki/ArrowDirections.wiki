@@ -4,6 +4,39 @@
 
 Demo of the different arrow directions that dot supports.
 
+= Code =
+
+{{{
+            return Fluently.CreateDirectedGraph()
+                .Nodes.Add(nodes =>
+                               {
+                                   nodes.WithName("a");
+                                   nodes.WithName("b");
+                                   nodes.WithName("c");
+                                   nodes.WithName("d");
+                                   nodes.WithName("e");
+                                   nodes.WithName("f");
+                                   nodes.WithName("g");
+                                   nodes.WithName("h");
+                               })
+                .Edges.Add(edges =>
+                               {
+                                   edges.From.NodeWithName("a").To.NodeWithName("b")
+                                       .WithArrowDirection(ArrowDirection.Back)
+                                       .WithLabel("Back");
+                                   edges.From.NodeWithName("c").To.NodeWithName("d")
+                                       .WithArrowDirection(ArrowDirection.Both)
+                                       .WithLabel("Both");
+                                   edges.From.NodeWithName("e").To.NodeWithName("f")
+                                       .WithArrowDirection(ArrowDirection.Forward)
+                                       .WithLabel("Forward");
+                                   edges.From.NodeWithName("g").To.NodeWithName("h")
+                                       .WithArrowDirection(ArrowDirection.None)
+                                       .WithLabel("None");
+                               });
+
+}}}
+
 = Image Output =
 
 http://fluentdot.googlecode.com/svn/wiki/Images/ArrowDirections.png
