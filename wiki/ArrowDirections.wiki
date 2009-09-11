@@ -1,15 +1,32 @@
-#summary ${DemoName}
+#summary Arrow Directions
 
 = Description =
 
-${DemoDescription}
+Demo of the different arrow directions that dot supports.
 
 = Image Output =
 
-http://code.google.com/p/fluentdot/wiki/Images/${ImageFileName}
+http://code.google.com/p/fluentdot/wiki/Images/ArrowDirections.gif
 
 = Dot Produced =
 
 {{{
-${Dot}
+digraph "DirectedGraph" {
+
+
+"a";
+"b";
+"c";
+"d";
+"e";
+"f";
+"g";
+"h";
+
+"a" -> "b" [dir="back", label="Back"];
+"c" -> "d" [dir="both", label="Both"];
+"e" -> "f" [dir="forward", label="Forward"];
+"g" -> "h" [dir="none", label="None"];
+
+}
 }}}
