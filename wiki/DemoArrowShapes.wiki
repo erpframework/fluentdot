@@ -18,7 +18,7 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoArrowShapes.png
             {
                 var shape = (ArrowShape) item.GetValue(null);
                 graph.Edges.Add(
-                    x => x.From.NodeWithName(a.ToString()).To.NodeWithName(b.ToString())
+                    x => x.FromNodeWithName(a.ToString()).ToNodeWithName(b.ToString())
                              .WithArrowTail(shape)
                              .WithLabel(item.Name));
                 a+=2;

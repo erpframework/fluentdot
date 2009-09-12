@@ -18,6 +18,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoArrowShapes Basic DOT Arrow Shapes]
   * [DemoArrowShapeModifiers DOT Arrow Modifiers]
   * [DemoCompositeArrowShapes DOT Composite Arrow Shapes]
+  * [DemoEdgeClipping Edge Head and Tail Clipping]
   * [DemoEdgeLabels Edge Head and Tail Labels]
   * [DemoEdgeStyles Edge Styles]
   * [DemoFonts Font Colors, Sizes, and Names]
@@ -30,6 +31,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoNodeSizes Node Sizing]
   * [DemoNodeStyles Node Styles]
   * [DemoPenModifiers Pen Modifiers]
+  * [DemoSameHeadAndTail Same Edge Head and Tails]
 
 
 = Layout =

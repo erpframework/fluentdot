@@ -25,14 +25,14 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeImages.png
                                })
                 .Edges.Add(edges =>
                                {
-                                   edges.From.NodeWithName("a").To.NodeWithName("b");
-                                   edges.From.NodeWithName("a").To.NodeWithName("c");
-                                   edges.From.NodeWithName("b").To.NodeWithName("c");
-                                   edges.From.NodeWithName("c").To.NodeWithName("d");
-                                   edges.From.NodeWithName("b").To.NodeWithName("e");
-                                   edges.From.NodeWithName("e").To.NodeWithName("f");
-                                   edges.From.NodeWithName("e").To.NodeWithName("g");
-                                   edges.From.NodeWithName("g").To.NodeWithName("h");
+                                   edges.FromNodeWithName("a").ToNodeWithName("b");
+                                   edges.FromNodeWithName("a").ToNodeWithName("c");
+                                   edges.FromNodeWithName("b").ToNodeWithName("c");
+                                   edges.FromNodeWithName("c").ToNodeWithName("d");
+                                   edges.FromNodeWithName("b").ToNodeWithName("e");
+                                   edges.FromNodeWithName("e").ToNodeWithName("f");
+                                   edges.FromNodeWithName("e").ToNodeWithName("g");
+                                   edges.FromNodeWithName("g").ToNodeWithName("h");
                                }
                 );
 
@@ -44,14 +44,14 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeImages.png
 digraph "DirectedGraph" {
 
 
-"a" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFA.tmp"];
-"b" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFB.tmp"];
-"c" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFA.tmp", height=1.5, width=1.5];
-"d" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFB.tmp"];
-"e" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFA.tmp", imagescale=true, height=1.5, width=1.5, label="Scaled Image"];
-"f" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFB.tmp", imagescale=true, height=1.8, width=1.5, label="Scaled Image"];
-"g" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFA.tmp"];
-"h" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmpFB.tmp"];
+"a" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70A.tmp"];
+"b" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70B.tmp"];
+"c" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70A.tmp", height=1.5, width=1.5];
+"d" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70B.tmp"];
+"e" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70A.tmp", imagescale=true, height=1.5, width=1.5, label="Scaled Image"];
+"f" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70B.tmp", imagescale=true, height=1.8, width=1.5, label="Scaled Image"];
+"g" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70A.tmp"];
+"h" [image="C:\Documents and Settings\riaanh\Local Settings\Temp\tmp70B.tmp"];
 
 "a" -> "b";
 "a" -> "c";
