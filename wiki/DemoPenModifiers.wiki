@@ -14,9 +14,7 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoPenModifiers.png
             return Fluently.CreateDirectedGraph()
                 .Nodes.Add(nodes =>
                                {
-                                   nodes.WithName("a");
                                    nodes.WithName("b").WithPenWidth(2.0).WithLabel("Pen Width : 2.0");
-                                   nodes.WithName("c");
                                    nodes.WithName("d").WithPenWidth(3.0).WithLabel("Pen Width : 3.0");
                                })
                 .Clusters.Add(cluster => cluster
@@ -65,10 +63,10 @@ graph [pencolor="#ff0000", penwidth=2, label="Red pen color, 2.0 Width"];
 
 }
 
-"a";
 "b" [penwidth=2, label="Pen Width : 2.0"];
-"c";
 "d" [penwidth=3, label="Pen Width : 3.0"];
+"a";
+"c";
 
 "a" -> "b";
 "b" -> "c";

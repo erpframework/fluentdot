@@ -12,14 +12,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoSimpleUndirectedGraph.png
 
 {{{
             return Fluently.CreateUndirectedGraph()
-                .Nodes.Add(x =>
-                               {
-                                   x.WithName("A");
-                                   x.WithName("B");
-                                   x.WithName("C");
-                                   x.WithName("D");
-                               }
-                )
                 .Edges.Add(x =>
                                {
                                    x.From.NodeWithName("A").To.NodeWithName("B");

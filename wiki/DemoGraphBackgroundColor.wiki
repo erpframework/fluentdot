@@ -12,15 +12,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoGraphBackgroundColor.png
 
 {{{
             return Fluently.CreateDirectedGraph()
-                .Nodes.Add(x =>
-                               {
-                                   x.WithName("a");
-                                   x.WithName("b");
-                                   x.WithName("c");
-                                   x.WithName("d");
-                                   x.WithName("e");
-                               }
-                )
                 .Edges.Add(x =>
                                {
                                    x.From.NodeWithName("a").To.NodeWithName("b");
@@ -44,7 +35,6 @@ graph [bgcolor="#6a5acd"];
 "b";
 "c";
 "d";
-"e";
 
 "a" -> "b";
 "a" -> "c";

@@ -36,13 +36,7 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoCompositeArrowShapes.png
                     chosenArrowShapes.Add(chosenShape);
                 }
                 var shape = new CompositeArrowShape(chosenArrowShapes.ToArray());
-                graph.Nodes.Add(
-                    nodes =>
-                        {
-                            nodes.WithName(a.ToString());
-                            nodes.WithName(b.ToString());
-                        })
-                    .Edges.Add(x => x.From.NodeWithName(a.ToString()).To.NodeWithName(b.ToString())
+                graph.Edges.Add(x => x.From.NodeWithName(a.ToString()).To.NodeWithName(b.ToString())
                                         .WithArrowHead(shape)
                                         .WithLabel(shape.ToDot()));
                 a+=2;
@@ -79,16 +73,16 @@ digraph "DirectedGraph" {
 "19";
 "20";
 
-"1" -> "2" [arrowhead="crowvee", label="crowvee"];
-"3" -> "4" [arrowhead="normaltee", label="normaltee"];
-"5" -> "6" [arrowhead="crowdot", label="crowdot"];
-"7" -> "8" [arrowhead="diamondcrow", label="diamondcrow"];
-"9" -> "10" [arrowhead="boxinv", label="boxinv"];
-"11" -> "12" [arrowhead="dottee", label="dottee"];
-"13" -> "14" [arrowhead="crowdot", label="crowdot"];
-"15" -> "16" [arrowhead="diamondinv", label="diamondinv"];
-"17" -> "18" [arrowhead="veedot", label="veedot"];
-"19" -> "20" [arrowhead="normalinv", label="normalinv"];
+"1" -> "2" [arrowhead="veebox", label="veebox"];
+"3" -> "4" [arrowhead="normalcrow", label="normalcrow"];
+"5" -> "6" [arrowhead="veebox", label="veebox"];
+"7" -> "8" [arrowhead="boxvee", label="boxvee"];
+"9" -> "10" [arrowhead="invdiamond", label="invdiamond"];
+"11" -> "12" [arrowhead="diamondtee", label="diamondtee"];
+"13" -> "14" [arrowhead="crownormal", label="crownormal"];
+"15" -> "16" [arrowhead="crowdiamond", label="crowdiamond"];
+"17" -> "18" [arrowhead="dotnormal", label="dotnormal"];
+"19" -> "20" [arrowhead="normalbox", label="normalbox"];
 
 }
 }}}

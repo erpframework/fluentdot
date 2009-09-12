@@ -22,7 +22,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoFonts.png
                                    nodes.WithName("BlueFont").WithFontColor(Color.Blue);
                                    nodes.WithName("SizeUp").WithFontSize(28.0);
                                    nodes.WithName("SizeDown").WithFontSize(7.0);
-                                   nodes.WithName("NormalSize");
                                    nodes.WithName("TimesRoman").WithFontName("Times-Roman");
                                    nodes.WithName("Helvetica").WithFontName("Helvetica");
                                    nodes.WithName("Courier").WithFontName("Courier");
@@ -53,10 +52,10 @@ graph [label="Courier Purple SizedUp Graph Label", fontcolor="#800080", fontsize
 "BlueFont" [fontcolor="#0000ff"];
 "SizeUp" [fontsize=28];
 "SizeDown" [fontsize=7];
-"NormalSize";
 "TimesRoman" [fontname="Times-Roman"];
 "Helvetica" [fontname="Helvetica"];
 "Courier" [fontname="Courier"];
+"NormalSize";
 
 "RedFont" -> "BlueFont" [fontcolor="#a52a2a", label="BrownFont"];
 "RedFont" -> "SizeUp" [fontcolor="#ff69b4", label="HotPink"];
