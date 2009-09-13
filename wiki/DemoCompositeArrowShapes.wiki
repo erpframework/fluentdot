@@ -73,16 +73,16 @@ digraph "DirectedGraph" {
 "19";
 "20";
 
-"1" -> "2" [arrowhead="dotnormal", label="dotnormal"];
-"3" -> "4" [arrowhead="diamondcrow", label="diamondcrow"];
-"5" -> "6" [arrowhead="normaldot", label="normaldot"];
-"7" -> "8" [arrowhead="diamondtee", label="diamondtee"];
-"9" -> "10" [arrowhead="diamondtee", label="diamondtee"];
-"11" -> "12" [arrowhead="veetee", label="veetee"];
-"13" -> "14" [arrowhead="normalbox", label="normalbox"];
-"15" -> "16" [arrowhead="teebox", label="teebox"];
-"17" -> "18" [arrowhead="veecrow", label="veecrow"];
-"19" -> "20" [arrowhead="invbox", label="invbox"];
+"1" -> "2" [arrowhead="dottee", label="dottee"];
+"3" -> "4" [arrowhead="boxdot", label="boxdot"];
+"5" -> "6" [arrowhead="invdiamond", label="invdiamond"];
+"7" -> "8" [arrowhead="veecrow", label="veecrow"];
+"9" -> "10" [arrowhead="veetee", label="veetee"];
+"11" -> "12" [arrowhead="invnormal", label="invnormal"];
+"13" -> "14" [arrowhead="invnormal", label="invnormal"];
+"15" -> "16" [arrowhead="veediamond", label="veediamond"];
+"17" -> "18" [arrowhead="normaldiamond", label="normaldiamond"];
+"19" -> "20" [arrowhead="teebox", label="teebox"];
 
 }
 }}}

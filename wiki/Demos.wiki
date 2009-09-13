@@ -29,6 +29,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoNodeImages Node Images]
   * [DemoNodeShapes Node Shapes]
   * [DemoNodeSizes Node Sizing]
+  * [DemoNodeSkew Node Skew]
   * [DemoNodeStyles Node Styles]
   * [DemoPenModifiers Pen Modifiers]
   * [DemoSameHeadAndTail Same Edge Head and Tails]
