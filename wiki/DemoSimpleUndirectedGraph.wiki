@@ -27,17 +27,13 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoSimpleUndirectedGraph.png
 
 {{{
 graph "UndirectedGraph" {
-
-
 "A";
 "B";
 "C";
 "D";
-
 "A" -- "B";
 "A" -- "C";
 "B" -- "C";
 "B" -- "D";
-
 }
 }}}

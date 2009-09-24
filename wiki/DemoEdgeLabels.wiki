@@ -36,8 +36,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoEdgeLabels.png
 digraph "DirectedGraph" {
 graph [nodesep=2];
 
-
-
 "a";
 "b";
 "c";
@@ -48,7 +46,6 @@ graph [nodesep=2];
 "h";
 "i";
 "j";
-
 "a" -> "b" [labelangle=100, taillabel="Angle : 100"];
 "a" -> "c" [labelangle=-100, headlabel="Angle : -100"];
 "b" -> "c" [labelfloat="true", label="Floating Label"];
@@ -59,6 +56,5 @@ graph [nodesep=2];
 "g" -> "h" [labelfontcolor="#ff0000", labelfontsize=7, labelfontname="Helvetica", taillabel="Red Helvetica 14 Point"];
 "g" -> "i" [decorate=true, label="Decorated Label"];
 "e" -> "j" [decorate=true, label="Decorated Label"];
-
 }
 }}}

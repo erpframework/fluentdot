@@ -32,8 +32,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoArrowShapes.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "1";
 "2";
 "3";
@@ -52,7 +50,6 @@ digraph "DirectedGraph" {
 "16";
 "17";
 "18";
-
 "1" -> "2" [arrowtail="box", label="Box"];
 "3" -> "4" [arrowtail="crow", label="Crow"];
 "5" -> "6" [arrowtail="diamond", label="Diamond"];
@@ -62,6 +59,5 @@ digraph "DirectedGraph" {
 "13" -> "14" [arrowtail="normal", label="Normal"];
 "15" -> "16" [arrowtail="tee", label="Tee"];
 "17" -> "18" [arrowtail="vee", label="Vee"];
-
 }
 }}}

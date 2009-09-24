@@ -30,18 +30,14 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeSeperation.png
 digraph "DirectedGraph" {
 graph [label="Minimum Node Seperation of 2 inches.", nodesep=2];
 
-
-
 "a";
 "b";
 "c";
 "d";
 "e";
-
 "a" -> "b";
 "a" -> "c";
 "c" -> "d";
 "c" -> "e";
-
 }
 }}}

@@ -35,8 +35,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeStyles.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "1" [style="dashed"];
 "2" [style="dashed"];
 "3" [style="dotted"];
@@ -53,7 +51,6 @@ digraph "DirectedGraph" {
 "14" [style="diagonals"];
 "15" [style="rounded"];
 "16" [style="rounded"];
-
 "1" -> "2" [label="Dashed"];
 "3" -> "4" [label="Dotted"];
 "5" -> "6" [label="Solid"];
@@ -62,6 +59,5 @@ digraph "DirectedGraph" {
 "11" -> "12" [label="Filled"];
 "13" -> "14" [label="Diagonals"];
 "15" -> "16" [label="Rounded"];
-
 }
 }}}

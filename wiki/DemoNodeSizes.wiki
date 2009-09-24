@@ -33,17 +33,13 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeSizes.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "TinyHeight_Expanded" [height=0.1, width=1.5];
 "TinyWidth_Expanded" [height=1.5, width=0.1];
 "Fixed_Size1" [height=0.5, width=0.5, fixedsize=true];
 "Fixed_Size2" [height=0.5, width=0.5, fixedsize=true];
-
 "TinyHeight_Expanded" -> "TinyWidth_Expanded";
 "TinyHeight_Expanded" -> "Fixed_Size1";
 "TinyWidth_Expanded" -> "Fixed_Size1";
 "Fixed_Size1" -> "Fixed_Size2";
-
 }
 }}}

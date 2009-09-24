@@ -31,8 +31,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoConstraints.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "a";
 "b";
 "c";
@@ -41,7 +39,6 @@ digraph "DirectedGraph" {
 "f";
 "g";
 "h";
-
 "a" -> "b";
 "a" -> "c";
 "b" -> "c" [constraint=false, label="Not Constrained"];
@@ -50,6 +47,5 @@ digraph "DirectedGraph" {
 "e" -> "f" [minlen=2, label="Minimum Length : 2"];
 "e" -> "g" [minlen=3, label="Minimum Length : 3"];
 "g" -> "h" [constraint=false, label="Not Constrained"];
-
 }
 }}}

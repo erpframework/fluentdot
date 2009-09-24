@@ -44,8 +44,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoLabelPlacements.png
 digraph "DirectedGraph" {
 graph [label="Bottom Right Graph Label", labeljust="r", labelloc="b"];
 
-
-
 "a" [labelloc="b", label="Location - Bottom", height=1, width=2];
 "b" [nojustify="true", label="Label\nNot\nJustified"];
 "d" [labelloc="t", label="Location - Top", height=1, width=2];
@@ -54,7 +52,6 @@ graph [label="Bottom Right Graph Label", labeljust="r", labelloc="b"];
 "g" [labelloc="t", label="Location - Top", height=1, width=2];
 "c";
 "h";
-
 "a" -> "b";
 "a" -> "c";
 "b" -> "c";
@@ -63,6 +60,5 @@ graph [label="Bottom Right Graph Label", labeljust="r", labelloc="b"];
 "e" -> "f" [nojustify="true", label="Label\nNot\nJustified"];
 "e" -> "g";
 "g" -> "h";
-
 }
 }}}

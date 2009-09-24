@@ -29,17 +29,13 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoGraphBackgroundColor.png
 digraph "DirectedGraph" {
 graph [bgcolor="#6a5acd"];
 
-
-
 "a";
 "b";
 "c";
 "d";
-
 "a" -> "b";
 "a" -> "c";
 "c" -> "d";
 "b" -> "d";
-
 }
 }}}

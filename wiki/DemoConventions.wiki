@@ -45,19 +45,15 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoConventions.png
 digraph "DirectedGraph" {
 graph [label="Conventions\nEven and odd numbered nodes are coloured differently\nEven to odd and odd to even edges are marked\nThe labels of all nodes are the tags of the nodes"];
 
-
-
 "a" [fillcolor="#b0c4de", style="filled", label="1"];
 "b" [fillcolor="#dcdcdc", style="filled", label="2"];
 "c" [fillcolor="#b0c4de", style="filled", label="3"];
 "d" [fillcolor="#dcdcdc", style="filled", label="4"];
 "e" [fillcolor="#b0c4de", style="filled", label="5"];
-
 "a" -> "b" [label="Odd to Even", color="#0000ff"];
 "a" -> "c";
 "c" -> "d" [label="Label Override", color="#0000ff"];
 "b" -> "d";
 "d" -> "e" [label="Even to Odd", color="#ff0000"];
-
 }
 }}}

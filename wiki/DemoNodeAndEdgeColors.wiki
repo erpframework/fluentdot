@@ -40,8 +40,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeAndEdgeColors.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "Red" [color="#ff0000"];
 "Green" [color="#008000"];
 "Blue" [color="#0000ff"];
@@ -49,13 +47,11 @@ digraph "DirectedGraph" {
 "Cyan" [color="#00ffff"];
 "FilledBrown" [fillcolor="#a52a2a", style="filled"];
 "FilledGoldenRod" [fillcolor="#daa520", style="filled"];
-
 "Red" -> "Green" [color="#ff7f50", label="Coral"];
 "Red" -> "Blue" [color="#ff8c00", label="DarkOrange"];
 "Blue" -> "Yellow" [color="#00bfff", label="DeepSkyBlue"];
 "Blue" -> "Cyan" [color="#d2691e", label="Chocolate"];
 "Cyan" -> "FilledBrown" [color="#800080", label="Purple"];
 "Cyan" -> "FilledGoldenRod" [color="#ff69b4", label="HotPink"];
-
 }
 }}}

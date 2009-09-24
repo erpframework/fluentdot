@@ -38,6 +38,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
 
 = Layout =
 
+  * [DemoClusterRank Cluster Rank]
   * [DemoClusters Clusters]
   * [DemoConstraints Constraints]
   * [DemoEdgeOrdeningIn Edge Ordering In]

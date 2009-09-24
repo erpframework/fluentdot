@@ -40,21 +40,17 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoMarginsAndPadding.png
 digraph "DirectedGraph" {
 graph [bgcolor="#dcdcdc", label="2 Point Graph Margin, 1 Inch Margin Around Graph", margin="2.00,2.00", pad=1.00,1.00];
 
-
-
 "b" [margin="0.50,0.50", label="0.5 Point Margin"];
 "e" [margin="1.00,1.00", label="1 Point Margin"];
 "g" [margin="2.00,2.00", label="2 Point Margin"];
 "a";
 "c";
 "f";
-
 "a" -> "b";
 "a" -> "c";
 "b" -> "c";
 "c" -> "e";
 "e" -> "f";
 "e" -> "g";
-
 }
 }}}

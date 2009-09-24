@@ -32,19 +32,15 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoLandscapeGraph.png
 digraph "DirectedGraph" {
 graph [label="Landscape Graph", rotate=90];
 
-
-
 "a";
 "b";
 "c";
 "d";
-
 "a" -> "b";
 "a" -> "c";
 "a" -> "d";
 "b" -> "c";
 "b" -> "d";
 "c" -> "d";
-
 }
 }}}

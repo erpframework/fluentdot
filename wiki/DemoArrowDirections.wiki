@@ -34,8 +34,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoArrowDirections.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "a";
 "b";
 "c";
@@ -44,11 +42,9 @@ digraph "DirectedGraph" {
 "f";
 "g";
 "h";
-
 "a" -> "b" [dir="back", label="Back"];
 "c" -> "d" [dir="both", label="Both"];
 "e" -> "f" [dir="forward", label="Forward"];
 "g" -> "h" [dir="none", label="None"];
-
 }
 }}}

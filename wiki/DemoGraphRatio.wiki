@@ -30,17 +30,13 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoGraphRatio.png
 digraph "DirectedGraph" {
 graph [ratio=5];
 
-
-
 "a";
 "b";
 "c";
 "d";
-
 "a" -> "b";
 "a" -> "c";
 "b" -> "c";
 "c" -> "d";
-
 }
 }}}

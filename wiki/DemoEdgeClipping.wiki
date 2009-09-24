@@ -40,8 +40,6 @@ digraph "DirectedGraph" {
 graph [nodesep=2];
 
 edge [tailclip="false", headclip="false"];
-
-
 "a";
 "b";
 "c";
@@ -49,7 +47,6 @@ edge [tailclip="false", headclip="false"];
 "e";
 "f";
 "g";
-
 "a" -> "b";
 "a" -> "c";
 "b" -> "c";
@@ -57,6 +54,5 @@ edge [tailclip="false", headclip="false"];
 "b" -> "e";
 "e" -> "f";
 "e" -> "g";
-
 }
 }}}

@@ -36,17 +36,13 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoGraphDefaults.png
 digraph "DirectedGraph" {
 node [shape=diamond, color="#008000", label="Green Diamond"];
 edge [label="Default Color Blue", color="#0000ff"];
-
-
 "c" [shape=doublecircle, color="#8b008b", label="Override of Shape and Color"];
 "a";
 "b";
 "d";
-
 "a" -> "b";
 "a" -> "c" [color="#ff0000", label="Override of Red Color"];
 "c" -> "d";
 "b" -> "d";
-
 }
 }}}

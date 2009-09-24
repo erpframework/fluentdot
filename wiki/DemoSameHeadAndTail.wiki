@@ -30,8 +30,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoSameHeadAndTail.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "a";
 "X";
 "b";
@@ -39,7 +37,6 @@ digraph "DirectedGraph" {
 "d";
 "e";
 "f";
-
 "a" -> "X" [samehead="Left"];
 "b" -> "X" [samehead="Left"];
 "c" -> "X" [samehead="Right"];
@@ -48,6 +45,5 @@ digraph "DirectedGraph" {
 "a" -> "e" [sametail="Left", samehead="Left"];
 "X" -> "f" [sametail="Right", samehead="Right"];
 "d" -> "f" [sametail="Right", samehead="Right"];
-
 }
 }}}

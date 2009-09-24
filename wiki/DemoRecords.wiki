@@ -47,14 +47,10 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoRecords.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "struct1" [shape=record, label="<f0> left|<f1> mid\ dle|<f2> right"];
 "struct2" [shape=record, label="<f0> one|<f1> two"];
 "struct3" [shape=record, label="<f0> hello\nworld|{<b> b|{<c> c|<here> d|<e> e}|<f> f}|<g> g|<h> h"];
-
 "struct1":"f1" -> "struct2":"f0";
 "struct1":"f2" -> "struct3":"here";
-
 }
 }}}

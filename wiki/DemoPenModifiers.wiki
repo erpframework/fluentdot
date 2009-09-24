@@ -49,25 +49,18 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoPenModifiers.png
 
 {{{
 digraph "DirectedGraph" {
-
 subgraph "clustersub" {
 graph [pencolor="#ff0000", penwidth=2, label="Red pen color, 2.0 Width"];
-
-
 
 "e";
 "f" [penwidth=1.5, label="Pen Width : 1.5"];
 "g";
 "h" [penwidth=0, label="Pen Width : 0"];
-
-
 }
-
 "b" [penwidth=2, label="Pen Width : 2.0"];
 "d" [penwidth=3, label="Pen Width : 3.0"];
 "a";
 "c";
-
 "a" -> "b";
 "b" -> "c";
 "b" -> "d";
@@ -78,6 +71,5 @@ graph [pencolor="#ff0000", penwidth=2, label="Red pen color, 2.0 Width"];
 "g" -> "h";
 "f" -> "g" [penwidth=3, label="Pen Width : 3.0"];
 "g" -> "a";
-
 }
 }}}

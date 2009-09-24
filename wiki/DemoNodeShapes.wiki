@@ -26,8 +26,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeShapes.png
 
 {{{
 graph "UndirectedGraph" {
-
-
 "Box" [shape=box];
 "Polygon" [shape=polygon];
 "Ellipse" [shape=ellipse];
@@ -60,7 +58,5 @@ graph "UndirectedGraph" {
 "Folder" [shape=folder];
 "Box3D" [shape=box3d];
 "Component" [shape=component];
-
-
 }
 }}}

@@ -57,8 +57,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoArrowShapeModifiers.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "1";
 "2";
 "3";
@@ -97,7 +95,6 @@ digraph "DirectedGraph" {
 "36";
 "37";
 "38";
-
 "1" -> "2" [arrowhead="lbox", arrowtail="lbox", label="Box - LeftClip"];
 "3" -> "4" [arrowhead="lcrow", arrowtail="lcrow", label="Crow - LeftClip"];
 "5" -> "6" [arrowhead="ldiamond", arrowtail="ldiamond", label="Diamond - LeftClip"];
@@ -117,6 +114,5 @@ digraph "DirectedGraph" {
 "33" -> "34" [arrowhead="odot", arrowtail="odot", label="Dot - Open"];
 "35" -> "36" [arrowhead="oinv", arrowtail="oinv", label="Inverted - Open"];
 "37" -> "38" [arrowhead="onormal", arrowtail="onormal", label="Normal - Open"];
-
 }
 }}}

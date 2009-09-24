@@ -72,85 +72,62 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoSubGraphsAndRanks.png
 
 {{{
 digraph "DirectedGraph" {
-
 subgraph "c0" {
 graph [rank="max"];
-
-
 
 "a";
 "b";
 "c";
 "d";
-
 "a" -> "b";
 "b" -> "c";
 "c" -> "d";
-
 }
 subgraph "c1" {
 graph [rank="max"];
 
-
-
 "e";
 "f";
 "g";
-
 "d" -> "e";
 "e" -> "f";
 "f" -> "g";
-
 }
 subgraph "c2" {
 graph [rank="max"];
 
-
-
 "h";
 "i";
 "j";
-
 "g" -> "h";
 "h" -> "i";
 "i" -> "j";
-
 }
 subgraph "c3" {
 graph [rank="max"];
 
-
-
 "k";
 "l";
 "m";
-
 "j" -> "k";
 "k" -> "l";
 "l" -> "m";
-
 }
 subgraph "c4" {
 graph [rank="min"];
 
-
-
 "n";
 "o";
 "p";
-
 "m" -> "n";
 "n" -> "o";
 "o" -> "p";
-
 }
-
 "aa";
 "dd";
 "gg";
 "jj";
 "mm";
-
 "aa" -> "a";
 "dd" -> "d";
 "gg" -> "g";
@@ -160,6 +137,5 @@ graph [rank="min"];
 "dd" -> "gg";
 "gg" -> "jj";
 "jj" -> "mm";
-
 }
 }}}

@@ -34,8 +34,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoEdgeOrdeningOut.png
 digraph "DirectedGraph" {
 graph [ordering="out", label="Out Ordering of edges"];
 
-
-
 "a";
 "b";
 "c";
@@ -44,7 +42,6 @@ graph [ordering="out", label="Out Ordering of edges"];
 "g";
 "f";
 "h";
-
 "a" -> "b";
 "a" -> "c";
 "b" -> "c";
@@ -53,6 +50,5 @@ graph [ordering="out", label="Out Ordering of edges"];
 "e" -> "g";
 "e" -> "f";
 "g" -> "h";
-
 }
 }}}

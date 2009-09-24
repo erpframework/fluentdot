@@ -28,8 +28,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoNodeOrientation.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "D0" [orientation=0];
 "D30" [orientation=30, shape=polygon];
 "D60" [orientation=60, shape=polygon];
@@ -42,7 +40,6 @@ digraph "DirectedGraph" {
 "D270" [orientation=270, shape=polygon];
 "D300" [orientation=300, shape=polygon];
 "D330" [orientation=330, shape=polygon];
-
 "D0" -> "D30";
 "D30" -> "D60";
 "D60" -> "D90";
@@ -54,6 +51,5 @@ digraph "DirectedGraph" {
 "D240" -> "D270";
 "D270" -> "D300";
 "D300" -> "D330";
-
 }
 }}}

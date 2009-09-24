@@ -50,8 +50,6 @@ http://fluentdot.googlecode.com/svn/wiki/Images/DemoCompositeArrowShapes.png
 
 {{{
 digraph "DirectedGraph" {
-
-
 "1";
 "2";
 "3";
@@ -72,17 +70,15 @@ digraph "DirectedGraph" {
 "18";
 "19";
 "20";
-
-"1" -> "2" [arrowhead="dottee", label="dottee"];
-"3" -> "4" [arrowhead="boxdot", label="boxdot"];
-"5" -> "6" [arrowhead="invdiamond", label="invdiamond"];
-"7" -> "8" [arrowhead="veecrow", label="veecrow"];
-"9" -> "10" [arrowhead="veetee", label="veetee"];
-"11" -> "12" [arrowhead="invnormal", label="invnormal"];
-"13" -> "14" [arrowhead="invnormal", label="invnormal"];
-"15" -> "16" [arrowhead="veediamond", label="veediamond"];
-"17" -> "18" [arrowhead="normaldiamond", label="normaldiamond"];
-"19" -> "20" [arrowhead="teebox", label="teebox"];
-
+"1" -> "2" [arrowhead="invdot", label="invdot"];
+"3" -> "4" [arrowhead="crowtee", label="crowtee"];
+"5" -> "6" [arrowhead="crowdot", label="crowdot"];
+"7" -> "8" [arrowhead="teedot", label="teedot"];
+"9" -> "10" [arrowhead="veenormal", label="veenormal"];
+"11" -> "12" [arrowhead="normaldot", label="normaldot"];
+"13" -> "14" [arrowhead="dotcrow", label="dotcrow"];
+"15" -> "16" [arrowhead="veetee", label="veetee"];
+"17" -> "18" [arrowhead="veedot", label="veedot"];
+"19" -> "20" [arrowhead="boxdiamond", label="boxdiamond"];
 }
 }}}
