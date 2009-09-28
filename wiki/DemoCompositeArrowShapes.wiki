@@ -70,15 +70,15 @@ digraph "DirectedGraph" {
 "18";
 "19";
 "20";
-"1" -> "2" [arrowhead="invdot", label="invdot"];
-"3" -> "4" [arrowhead="crowtee", label="crowtee"];
-"5" -> "6" [arrowhead="crowdot", label="crowdot"];
-"7" -> "8" [arrowhead="teedot", label="teedot"];
-"9" -> "10" [arrowhead="veenormal", label="veenormal"];
-"11" -> "12" [arrowhead="normaldot", label="normaldot"];
-"13" -> "14" [arrowhead="dotcrow", label="dotcrow"];
-"15" -> "16" [arrowhead="veetee", label="veetee"];
-"17" -> "18" [arrowhead="veedot", label="veedot"];
-"19" -> "20" [arrowhead="boxdiamond", label="boxdiamond"];
+"1" -> "2" [arrowhead="dotdiamond", label="dotdiamond"];
+"3" -> "4" [arrowhead="invbox", label="invbox"];
+"5" -> "6" [arrowhead="invvee", label="invvee"];
+"7" -> "8" [arrowhead="crowbox", label="crowbox"];
+"9" -> "10" [arrowhead="boxvee", label="boxvee"];
+"11" -> "12" [arrowhead="veenormal", label="veenormal"];
+"13" -> "14" [arrowhead="dotinv", label="dotinv"];
+"15" -> "16" [arrowhead="diamondcrow", label="diamondcrow"];
+"17" -> "18" [arrowhead="normalbox", label="normalbox"];
+"19" -> "20" [arrowhead="normalvee", label="normalvee"];
 }
 }}}

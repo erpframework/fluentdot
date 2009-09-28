@@ -29,6 +29,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoNodeDistortion Node Distortion]
   * [DemoNodeImages Node Images]
   * [DemoNodeShapes Node Shapes]
+  * [DemoNodeSides Node Sides]
   * [DemoNodeSizes Node Sizing]
   * [DemoNodeSkew Node Skew]
   * [DemoNodeStyles Node Styles]
@@ -49,6 +50,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoMarginsAndPadding Margins and Padding]
   * [DemoNodeOrientation Node Orientation]
   * [DemoNodeSeperation Node Seperation]
+  * [DemoGraphRankDirection Rank Direction]
   * [DemoRecords Records]
   * [DemoSubGraphsAndRanks Sub Graphs and Ranks]
 
@@ -56,3 +58,4 @@ These samples are exported from the !FluentDot.Samples application - for the ful
 = API =
 
   * [DemoConventions Conventions]
+
