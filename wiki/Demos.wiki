@@ -47,6 +47,7 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoGraphRatio Graph Ratio]
   * [DemoLandscapeGraph Graph Rotation]
   * [DemoLabelPlacements Label Placements]
+  * [DemoLogicalHeadsAndTails Logical Heads and Tails]
   * [DemoMarginsAndPadding Margins and Padding]
   * [DemoNodeOrientation Node Orientation]
   * [DemoNodeSeperation Node Seperation]
