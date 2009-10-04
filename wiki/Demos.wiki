@@ -46,14 +46,17 @@ These samples are exported from the !FluentDot.Samples application - for the ful
   * [DemoEdgeOrdeningOut Edge Ordering Out]
   * [DemoGraphRatio Graph Ratio]
   * [DemoLandscapeGraph Graph Rotation]
+  * [DemoHeadPorts Head Ports]
   * [DemoLabelPlacements Label Placements]
   * [DemoLogicalHeadsAndTails Logical Heads and Tails]
   * [DemoMarginsAndPadding Margins and Padding]
   * [DemoNodeOrientation Node Orientation]
   * [DemoNodeSeperation Node Seperation]
   * [DemoGraphRankDirection Rank Direction]
+  * [DemoGraphRankSeperation Rank Seperation]
   * [DemoRecords Records]
   * [DemoSubGraphsAndRanks Sub Graphs and Ranks]
+  * [DemoTailPorts Tail Ports]
 
 
 = API =
