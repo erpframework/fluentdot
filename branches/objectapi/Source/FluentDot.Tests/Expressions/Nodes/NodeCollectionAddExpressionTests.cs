@@ -7,7 +7,7 @@
 */
 
 
-using FluentDot.Entities.Graphs;
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Nodes;
 using FluentDot.Expressions.Nodes;
 using NUnit.Framework;
@@ -21,7 +21,7 @@ namespace FluentDot.Tests.Expressions.Nodes
 
         [Test]
         public void CreateNode_Should_Add_Node_To_Graph() {
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
 
             var expression = new NodeCollectionAddExpression(graph);
 
@@ -35,7 +35,7 @@ namespace FluentDot.Tests.Expressions.Nodes
 
         [Test]
         public void CreateNode_Should_Add_Node_To_Graph_And_Apply_Custom_Configuration() {
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
 
             var expression = new NodeCollectionAddExpression(graph);
             graph.Expect(x => x.AddNode(null))

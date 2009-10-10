@@ -8,8 +8,9 @@
 
 
 using System.Collections.Generic;
+using FluentDot.Entities.Graphs;
 
-namespace FluentDot.Entities.Graphs
+namespace FluentDot.Builders.Graphs
 {
     /// <summary>
     /// A concrete implementation of an <see cref="ISubGraphTracker"/>.

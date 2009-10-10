@@ -6,6 +6,7 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Edges;
 using FluentDot.Entities.Graphs;
 using FluentDot.Entities.Nodes;
@@ -20,7 +21,7 @@ namespace FluentDot.Tests.Expressions.Graphs {
 
         [Test]
         public void Add_Should_Apply_Action_And_Add_SubGraph_To_Graph() {
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var graphExpression = MockRepository.GenerateMock<IGraphExpression>();
             var edgeTracker = MockRepository.GenerateMock<IEdgeTracker>();
             var nodeTracker = MockRepository.GenerateMock<INodeTracker>();

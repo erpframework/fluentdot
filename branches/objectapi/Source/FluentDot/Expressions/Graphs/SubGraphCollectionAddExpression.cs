@@ -13,6 +13,7 @@ namespace FluentDot.Expressions.Graphs {
     /// A concrete implementation of a <see cref="ISubGraphCollectionAddExpression"/>.
     /// </summary>
     public class SubGraphCollectionAddExpression : ISubGraphCollectionAddExpression {
+        
         #region Globals
 
         private readonly IGraph graph;

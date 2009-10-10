@@ -6,7 +6,7 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
-using FluentDot.Entities.Graphs;
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Nodes;
 using FluentDot.Expressions.Graphs;
 using FluentDot.Expressions.Nodes;
@@ -22,7 +22,7 @@ namespace FluentDot.Tests.Expressions.Nodes
         [Test]
         public void Add_Gets_Applied_To_Graph()
         {
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
 
             graph.Expect(x => x.AddNode(null))
                 .IgnoreArguments()
@@ -32,7 +32,7 @@ namespace FluentDot.Tests.Expressions.Nodes
                 .IgnoreArguments()
                 .Constraints(Is.Matching<IGraphNode>(x => x.Name == "b"));
 
-            var graphExpression = new GraphExpression<IGraph>(graph);
+            var graphExpression = new GraphExpression<IGraphBuilder>(graph);
             var expression = new NodeCollectionModifiersExpression<IGraphExpression>(graph, graphExpression);
             expression.Add(
                 nodes =>
@@ -48,8 +48,8 @@ namespace FluentDot.Tests.Expressions.Nodes
         [Test]
         public void Add_Returns_Parent_Expression()
         {
-            var graph = MockRepository.GenerateMock<IGraph>();
-            var graphExpression = new GraphExpression<IGraph>(graph);
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
+            var graphExpression = new GraphExpression<IGraphBuilder>(graph);
             var expression = new NodeCollectionModifiersExpression<IGraphExpression>(graph, graphExpression);
 
             var instance = expression.Add(nodes => nodes.WithName("a"));
@@ -59,7 +59,7 @@ namespace FluentDot.Tests.Expressions.Nodes
         [Test]
         public void AddRecord_Gets_Applied_To_Graph()
         {
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
 
             graph.Expect(x => x.AddNode(null))
                 .IgnoreArguments()
@@ -69,7 +69,7 @@ namespace FluentDot.Tests.Expressions.Nodes
                 .IgnoreArguments()
                 .Constraints(Is.Matching<IRecordNode>(x => x.Name == "b"));
 
-            var graphExpression = new GraphExpression<IGraph>(graph);
+            var graphExpression = new GraphExpression<IGraphBuilder>(graph);
             var expression = new NodeCollectionModifiersExpression<IGraphExpression>(graph, graphExpression);
             expression.AddRecord(
                 records =>
@@ -83,8 +83,8 @@ namespace FluentDot.Tests.Expressions.Nodes
 
         [Test]
         public void AddRecord_Returns_Parent_Expression() {
-            var graph = MockRepository.GenerateMock<IGraph>();
-            var graphExpression = new GraphExpression<IGraph>(graph);
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
+            var graphExpression = new GraphExpression<IGraphBuilder>(graph);
             var expression = new NodeCollectionModifiersExpression<IGraphExpression>(graph, graphExpression);
 
             var instance = expression.AddRecord(nodes => nodes.WithName("a"));

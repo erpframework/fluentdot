@@ -6,19 +6,22 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
-using System.Collections.Generic;
+using System.Drawing;
 using FluentDot.Common;
-using FluentDot.Conventions;
-using FluentDot.Entities.Edges;
-using FluentDot.Entities.Nodes;
 
-namespace FluentDot.Entities.Graphs
-{
+namespace FluentDot.Entities.Graphs {
+
     /// <summary>
-    /// A DOT graph.
+    /// A representation of a graph.
     /// </summary>
-    public interface IGraph : IDotElement, IAttributeBasedEntity {
-        
+    public interface IGraph : IDotElement {
+
+        /// <summary>
+        /// Gets or sets the name of the graph.
+        /// </summary>
+        /// <value>The name.</value>
+        string Name { get; set; }
+
         /// <summary>
         /// Gets or sets the type of graph this instance represents.
         /// </summary>
@@ -26,87 +29,39 @@ namespace FluentDot.Entities.Graphs
         GraphType Type { get; }
 
         /// <summary>
-        /// Gets or sets the name of the graph.
+        /// Sets the url property on the graph.
         /// </summary>
-        /// <value>The name of the graph.</value>
-        string Name { get; set; }
+        /// <value>The URL to set on the graph.</value>
+        string Url { get; set; }
 
         /// <summary>
-        /// Gets a readonly collection of the nodes currently in the graph.
+        /// Sets the background color of the graph.
         /// </summary>
-        /// <value>The nodes in the graph.</value>
-        IEnumerable<IGraphNode> Nodes { get; }
+        /// <value>The color to set the background to.</value>
+        Color? BackgroundColor { get; set; }
 
         /// <summary>
-        /// Gets the node lookup.
+        /// Sets the graph as concentrated - that is, to use edge concentrators.  The default is <c>false</c>.
         /// </summary>
-        /// <value>The node lookup.</value>
-        INodeTracker NodeLookup { get; }
+        /// <value><c>true</c> if concentrate; otherwise, <c>false</c>.</value>
+        bool Concentrate { get; set; }
 
         /// <summary>
-        /// Adds the specified node to the graph.
+        /// Sets whether the the graph should be centered on the canvase.  The default is <c>false</c>.
         /// </summary>
-        /// <param name="node">The node to add to the graph.</param>
-        void AddNode(IGraphNode node);
-        
-        /// <summary>
-        /// Gets a readonly collection of the edges currently in the graph.
-        /// </summary>
-        /// <value>The edges in the graph.</value>
-        IEnumerable<IEdge> Edges { get; }
+        /// <value><c>true</c> if the graph should be centered on the canvas; otherwise, <c>false</c>.</value>
+        bool CenterOnCanvas { get; set; }
 
         /// <summary>
-        /// Adds the specified edge to the graph.
+        /// Sets the font name that is used to label the graph.
         /// </summary>
-        /// <param name="edge">The edge to add to the graph.</param>
-        void AddEdge(IEdge edge);
+        /// <param name="value">Name of the font to use.</param>
+        string FontName { get; set; }
 
         /// <summary>
-        /// Gets the edge lookup.
+        /// Sets the font size that is used to label the graph.
         /// </summary>
-        /// <value>The edge lookup.</value>
-        IEdgeTracker EdgeLookup { get; }
-
-        /// <summary>
-        /// Adds the sub graph to the graph.
-        /// </summary>
-        /// <param name="subGraph">The sub graph to add.</param>
-        void AddSubGraph(ISubGraph subGraph);
-
-        /// <summary>
-        /// Gets the sub graph lookup.
-        /// </summary>
-        /// <value>The sub graph lookup.</value>
-        ISubGraphTracker SubGraphLookup { get; }
-
-        /// <summary>
-        /// Gets the node defaults.
-        /// </summary>
-        /// <value>The node defaults.</value>
-        IEntityDefaults NodeDefaults { get;}
-
-        /// <summary>
-        /// Gets the edge defaults.
-        /// </summary>
-        /// <value>The edge defaults.</value>
-        IEntityDefaults EdgeDefaults { get;}
-
-        /// <summary>
-        /// Gets the conventions.
-        /// </summary>
-        /// <value>The conventions.</value>
-        IConventionTracker Conventions { get; }
-
-        /// <summary>
-        /// Sets the node defaults.
-        /// </summary>
-        /// <param name="template">The template.</param>
-        void SetNodeDefaults(IGraphNode template);
-
-        /// <summary>
-        /// Sets the edge defaults.
-        /// </summary>
-        /// <param name="template">The template.</param>
-        void SetEdgeDefaults(IEdge template);
+        /// <value>The size of the font.</value>
+        double? FontSize { get; set; }
     }
 }

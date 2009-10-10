@@ -8,8 +8,8 @@
 
 using System;
 using FluentDot.Attributes.Shared;
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Edges;
-using FluentDot.Entities.Graphs;
 using FluentDot.Entities.Nodes;
 using FluentDot.Expressions.Edges;
 using NUnit.Framework;
@@ -27,7 +27,7 @@ namespace FluentDot.Tests.Expressions.Edges
             var fromNode = MockRepository.GenerateMock<IGraphNode>();
             var toNode = MockRepository.GenerateMock<IGraphNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             
 
@@ -60,7 +60,7 @@ namespace FluentDot.Tests.Expressions.Edges
         [Test]
         public void NodeWithName_Should_AddNode_If_Node_Not_Found() {
             var fromNode = MockRepository.GenerateMock<IGraphNode>();
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             
             graph.Expect(x => x.NodeLookup).Return(nodeLookup);
@@ -82,7 +82,7 @@ namespace FluentDot.Tests.Expressions.Edges
             var fromNode = MockRepository.GenerateMock<IGraphNode>();
             var toNode = MockRepository.GenerateMock<IGraphNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
 
 
@@ -117,7 +117,7 @@ namespace FluentDot.Tests.Expressions.Edges
         [ExpectedException(typeof(ArgumentException))]
         public void NodeWithTag_Should_Throw_Exception_If_Node_Not_Found() {
             var fromNode = MockRepository.GenerateMock<IGraphNode>();
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             
             graph.Expect(x => x.NodeLookup).Return(nodeLookup);
@@ -130,7 +130,7 @@ namespace FluentDot.Tests.Expressions.Edges
         public void NewNode_Should_Add_NewNode_To_Graph_And_Return_Configuration_Options() {
             var fromNode = MockRepository.GenerateMock<IGraphNode>();
             
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<ILookupNodes>();
             
             IEdge edge = null;
@@ -156,7 +156,7 @@ namespace FluentDot.Tests.Expressions.Edges
         public void NewNode_Should_Add_NewNode_To_Graph_And_Apply_Node_Configuraiton() {
             var fromNode = MockRepository.GenerateMock<IGraphNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<ILookupNodes>();
 
             IEdge edge = null;
@@ -187,7 +187,7 @@ namespace FluentDot.Tests.Expressions.Edges
             var fromNode = MockRepository.GenerateMock<IRecordNode>();
             var toNode = MockRepository.GenerateMock<IRecordNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             var elementTracker = MockRepository.GenerateMock<IElementTracker>();
 
@@ -222,7 +222,7 @@ namespace FluentDot.Tests.Expressions.Edges
             var fromNode = MockRepository.GenerateMock<IRecordNode>();
             var toNode = MockRepository.GenerateMock<IRecordNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             var elementTracker = MockRepository.GenerateMock<IElementTracker>();
 
@@ -241,7 +241,7 @@ namespace FluentDot.Tests.Expressions.Edges
             var fromNode = MockRepository.GenerateMock<IRecordNode>();
             var toNode = MockRepository.GenerateMock<IRecordNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             var elementTracker = MockRepository.GenerateMock<IElementTracker>();
 
@@ -276,7 +276,7 @@ namespace FluentDot.Tests.Expressions.Edges
             var fromNode = MockRepository.GenerateMock<IRecordNode>();
             var toNode = MockRepository.GenerateMock<IRecordNode>();
 
-            var graph = MockRepository.GenerateMock<IGraph>();
+            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var nodeLookup = MockRepository.GenerateMock<INodeTracker>();
             var elementTracker = MockRepository.GenerateMock<IElementTracker>();
 

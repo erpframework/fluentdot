@@ -28,5 +28,17 @@ namespace FluentDot.Tests.Attributes.Shared
         public void ToDot_Should_Convert_Transparet_To_String() {
             Assert.AreEqual(new ColorValue(Color.Transparent).ToDot(), "transparent");
         }
+
+        [Test]
+        public void Can_Cast_To_Color()
+        {
+            Assert.AreEqual((Color)new ColorValue(Color.Cyan), Color.Cyan);
+        }
+
+        [Test]
+        public void Can_Cast_From_Color()
+        {
+            Assert.AreEqual(((ColorValue)Color.DarkBlue).Value, Color.DarkBlue);
+        }
     }
 }

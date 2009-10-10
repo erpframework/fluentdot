@@ -221,7 +221,7 @@
     <Compile Include="Conventions\NodeInfo.cs" />
     <Compile Include="Entities\Edges\EdgeDefaults.cs" />
     <Compile Include="Entities\EntityDefaultsBase.cs" />
-    <Compile Include="Entities\Graphs\AbstractGraph.cs" />
+    <Compile Include="Builders\Graphs\GraphBuilder.cs" />
     <Compile Include="Attributes\AttributeCollection.cs" />
     <Compile Include="Entities\Edges\AbstractEdge.cs" />
     <Compile Include="Attributes\Shared\ColorAttribute.cs" />
@@ -232,8 +232,10 @@
     <Compile Include="Attributes\Edges\ArrowShape.cs" />
     <Compile Include="Attributes\Edges\ArrowShapeModifier.cs" />
     <Compile Include="Entities\AttributeBasedEntity.cs" />
+    <Compile Include="Entities\Graphs\AbstractGraph.cs" />
     <Compile Include="Entities\Graphs\Cluster.cs" />
-    <Compile Include="Entities\Graphs\SubGraphTracker.cs" />
+    <Compile Include="Entities\Graphs\IGraph.cs" />
+    <Compile Include="Builders\Graphs\SubGraphTracker.cs" />
     <Compile Include="Attributes\Edges\CompositeArrowShape.cs" />
     <Compile Include="Entities\Edges\DirectedEdge.cs" />
     <Compile Include="Attributes\Edges\EdgeStyle.cs" />
@@ -244,7 +246,7 @@
     <Compile Include="Attributes\Edges\IArrowShape.cs" />
     <Compile Include="Entities\IAttributeBasedEntity.cs" />
     <Compile Include="Entities\Graphs\ICluster.cs" />
-    <Compile Include="Entities\Graphs\ISubGraphTracker.cs" />
+    <Compile Include="Builders\Graphs\ISubGraphTracker.cs" />
     <Compile Include="Entities\Edges\IEdge.cs" />
     <Compile Include="Attributes\Shared\LabelAttribute.cs" />
     <Compile Include="Entities\Graphs\DirectedGraph.cs" />
@@ -256,7 +258,7 @@
     <Compile Include="Entities\Edges\IEdgeTracker.cs" />
     <Compile Include="Entities\Nodes\IElementTracker.cs" />
     <Compile Include="Entities\IEntityDefaults.cs" />
-    <Compile Include="Entities\Graphs\IGraph.cs" />
+    <Compile Include="Builders\Graphs\IGraphBuilder.cs" />
     <Compile Include="Entities\Nodes\IGraphNode.cs" />
     <Compile Include="Entities\Edges\ILookupEdges.cs" />
     <Compile Include="Entities\Nodes\ILookupNodes.cs" />
@@ -349,6 +351,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentDot.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Builders\Edges\" />
+    <Folder Include="Builders\Nodes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

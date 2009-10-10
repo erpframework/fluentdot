@@ -27,5 +27,18 @@ namespace FluentDot.Attributes
         /// </summary>
         /// <value>The current attributes.</value>
         IList<IDotAttribute> CurrentAttributes { get; }
+
+        /// <summary>
+        /// Gets the attribute by type.
+        /// </summary>
+        /// <typeparam name="T">The type of attribute.</typeparam>
+        /// <returns>The attribute instance, if found, else null.</returns>
+        T GetAttribute<T>() where T : IDotAttribute;
+
+        /// <summary>
+        /// Removes an attribute of this type, if found.
+        /// </summary>
+        /// <typeparam name="T">The type of attirbute to remove.</typeparam>
+        void Remove<T>() where T : IDotAttribute;
     }
 }

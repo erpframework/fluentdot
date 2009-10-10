@@ -6,12 +6,37 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
+using FluentDot.Builders.Graphs;
+
 namespace FluentDot.Entities.Graphs
 {
     /// <summary>
     /// A concrete implementation of a <see cref="IUndirectedGraph"/>.
     /// </summary>
-    public class UndirectedGraph : AbstractGraph , IUndirectedGraph {
+    public class UndirectedGraph : AbstractGraph, IUndirectedGraph {
+
+        #region Construction
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UndirectedGraph"/> class.
+        /// </summary>
+        public UndirectedGraph()
+            : base(new GraphBuilder("graph"))
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UndirectedGraph"/> class.
+        /// </summary>
+        /// <param name="graphBuilder">The graph builder.</param>
+        internal UndirectedGraph(IGraphBuilder graphBuilder)
+            : base(graphBuilder)
+        {
+
+        }
+
+        #endregion
 
         #region AbstractGraph Members
 
@@ -22,14 +47,6 @@ namespace FluentDot.Entities.Graphs
         public override GraphType Type
         {
             get { return GraphType.Undirected; }
-        }
-
-        /// <summary>
-        /// Gets the graph indicator.
-        /// </summary>
-        /// <value>The graph indicator.</value>
-        protected override string GraphIndicator {
-            get { return "graph"; }
         }
        
         #endregion

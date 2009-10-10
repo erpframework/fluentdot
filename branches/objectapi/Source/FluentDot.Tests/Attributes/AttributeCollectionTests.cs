@@ -8,6 +8,8 @@
 
 using System;
 using FluentDot.Attributes;
+using FluentDot.Attributes.Edges;
+using FluentDot.Attributes.Nodes;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -17,6 +19,40 @@ namespace FluentDot.Tests.Attributes
     public class AttributeCollectionTests {
         
         #region Tests
+
+        [Test]
+        public void Remove_Removes_Attribute()
+        {
+            var attribute = new NodeStyleAttribute(NodeStyle.Bold);
+            var collection = new AttributeCollection();
+
+            collection.AddAttribute(attribute);
+            Assert.AreEqual(collection.CurrentAttributes.Count, 1);
+            collection.Remove<NodeStyleAttribute>();
+            Assert.AreEqual(collection.CurrentAttributes.Count, 0);
+
+            // Collection should just ignore attribute remove if not found
+            collection.Remove<NodeStyleAttribute>();
+            Assert.AreEqual(collection.CurrentAttributes.Count, 0);
+        }
+
+        [Test]
+        public void GetAttribute_Returns_Attribute_If_Present()
+        {
+            var attribute = new NodeStyleAttribute(NodeStyle.Bold);
+            var collection = new AttributeCollection();
+
+            Assert.IsNull(collection.GetAttribute<NodeStyleAttribute>());
+            
+            collection.AddAttribute(attribute);
+
+            var retrieved = collection.GetAttribute<NodeStyleAttribute>();
+            Assert.IsNotNull(retrieved);
+            Assert.AreSame(attribute, retrieved);
+
+            Assert.IsNull(collection.GetAttribute<EdgeStyleAttribute>());
+        }
+
 
         [Test]
         public void Add_Adds_Attribute_To_Collection()

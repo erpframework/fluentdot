@@ -12,8 +12,8 @@ using System.Drawing;
 using FluentDot.Attributes;
 using FluentDot.Attributes.Graphs;
 using FluentDot.Attributes.Shared;
+using FluentDot.Builders.Graphs;
 using FluentDot.Common;
-using FluentDot.Entities.Graphs;
 using FluentDot.Execution;
 using FluentDot.Expressions.Graphs;
 using NUnit.Framework;
@@ -31,7 +31,7 @@ namespace FluentDot.Tests.Expressions.Graphs
         public void WithName_Sets_Graph_Name_Correctly() {
             var graphExpression = new TestGraphExpression();
 
-            IGraph graph = graphExpression.Graph;
+            IGraphBuilder graph = graphExpression.Graph;
 
             graph.Expect(x => x.Name = "testName");
 
@@ -46,7 +46,7 @@ namespace FluentDot.Tests.Expressions.Graphs
         {
             var graphExpression = new TestGraphExpression();
 
-            IGraph graph = graphExpression.Graph;
+            IGraphBuilder graph = graphExpression.Graph;
 
             graph.Expect(x => x.ToDot()).Return("bla");
 
@@ -64,7 +64,7 @@ namespace FluentDot.Tests.Expressions.Graphs
 
             var graphExpression = new TestGraphExpression();
 
-            IGraph graph = graphExpression.Graph;
+            IGraphBuilder graph = graphExpression.Graph;
             graph.Expect(x => x.Name = "testName");
             graph.Expect(x => x.ToDot()).Return("dotty");
 
@@ -86,7 +86,7 @@ namespace FluentDot.Tests.Expressions.Graphs
 
             var graphExpression = new TestGraphExpression();
 
-            IGraph graph = graphExpression.Graph;
+            IGraphBuilder graph = graphExpression.Graph;
             graph.Expect(x => x.Name = "testName");
             graph.Expect(x => x.ToDot()).Return("dotty");
 
@@ -372,7 +372,7 @@ namespace FluentDot.Tests.Expressions.Graphs
             AssertAttributeAdded(action, attributeType, attributeValue, null);
         }
 
-        private static void AssertAttributeAdded(Action<IGraphExpression> action, Type attributeType, object attributeValue, Action<IGraph> customAsserts) {
+        private static void AssertAttributeAdded(Action<IGraphExpression> action, Type attributeType, object attributeValue, Action<IGraphBuilder> customAsserts) {
             var expression = new TestGraphExpression();
 
             var attributes = new AttributeCollection();
@@ -394,20 +394,20 @@ namespace FluentDot.Tests.Expressions.Graphs
             expression.Graph.VerifyAllExpectations();
         }
         
-        private class TestGraphExpression : GraphExpression<IGraph> {
+        private class TestGraphExpression : GraphExpression<IGraphBuilder> {
             
             private readonly IFileService fileService;
             private readonly IDotExecutor dotExecutor;
 
             public TestGraphExpression() : this(
-                MockRepository.GenerateMock<IGraph>(), 
+                MockRepository.GenerateMock<IGraphBuilder>(), 
                 MockRepository.GenerateMock<IFileService>(),
                 MockRepository.GenerateMock<IDotExecutor>()
                 ) {
 
                 }
 
-            private TestGraphExpression(IGraph graph, IFileService fileService, IDotExecutor dotExecutor)
+            private TestGraphExpression(IGraphBuilder graph, IFileService fileService, IDotExecutor dotExecutor)
                 : base(graph, fileService, dotExecutor) {
                 this.fileService = fileService;
                 this.dotExecutor = dotExecutor;
