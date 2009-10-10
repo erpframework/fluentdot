@@ -7,31 +7,23 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentDot.Entities.Edges;
-using FluentDot.Entities.Nodes;
-using FluentDot.Conventions;
+using System.Drawing;
+using FluentDot.Attributes;
+using FluentDot.Attributes.Graphs;
+using FluentDot.Attributes.Shared;
+using FluentDot.Builders.Graphs;
 
-namespace FluentDot.Entities.Graphs
-{
+namespace FluentDot.Entities.Graphs {
+
     /// <summary>
-    /// A base class for the different types of graphs.
+    /// An abstract base class for graphs.
     /// </summary>
-    public abstract class AbstractGraph : AttributeBasedEntity, IGraph {
+    public abstract class AbstractGraph : IGraph {
 
         #region Globals
 
-        private readonly INodeTracker nodeTracker;
-        private readonly IEdgeTracker edgeTracker;
-        private readonly ISubGraphTracker subGraphTracker;
-        private readonly IConventionTracker conventionTracker = new ConventionTracker();
-        private IEntityDefaults nodeDefaults;
-        private IEntityDefaults edgeDefaults;
+        private readonly IGraphBuilder graphBuilder;
 
-        private readonly List<IGraphNode> nodes = new List<IGraphNode>();
-        private readonly List<IEdge> edges = new List<IEdge>();
-        
         #endregion
 
         #region Construction
@@ -39,30 +31,10 @@ namespace FluentDot.Entities.Graphs
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractGraph"/> class.
         /// </summary>
-        protected AbstractGraph() : this(new NodeTracker(), new EdgeTracker(), new SubGraphTracker())
+        /// <param name="graphBuilder">The graph builder.</param>
+        internal AbstractGraph(IGraphBuilder graphBuilder)
         {
-            
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AbstractGraph"/> class.
-        /// </summary>
-        /// <param name="nodeTracker">The node tracker.</param>
-        /// <param name="edgeTracker">The edge tracker.</param>
-        /// <param name="subGraphTracker">The sub graph tracker.</param>
-        protected AbstractGraph(INodeTracker nodeTracker, IEdgeTracker edgeTracker, ISubGraphTracker subGraphTracker)
-        {
-            if (edgeTracker == null) {
-                throw new ArgumentException("Invalid edge tracker specified.", "edgeTracker");
-            }
-
-            if (nodeTracker == null) {
-                throw new ArgumentException("Invalid node tracker specified.", "nodeTracker");
-            }
-
-            this.nodeTracker = nodeTracker;
-            this.edgeTracker = edgeTracker;
-            this.subGraphTracker = subGraphTracker;
+            this.graphBuilder = graphBuilder;
         }
 
         #endregion
@@ -70,141 +42,86 @@ namespace FluentDot.Entities.Graphs
         #region IGraph Members
 
         /// <summary>
+        /// Gets or sets the name of the graph.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name
+        {
+            get { return graphBuilder.Name; }
+            set { graphBuilder.Name = value; }
+        }
+
+        /// <summary>
         /// Gets or sets the type of graph this instance represents.
         /// </summary>
         /// <value>The type of graph.</value>
-        public abstract GraphType Type {get;}
-
-        /// <summary>
-        /// Gets or sets the name of the graph.
-        /// </summary>
-        /// <value>The name of the graph.</value>
-        public virtual string Name { get; set; }
-
-        /// <summary>
-        /// Gets a readonly collection of the nodes currently in the graph.
-        /// </summary>
-        /// <value>The nodes in the graph.</value>
-        public IEnumerable<IGraphNode> Nodes {
-            get { return nodes; }
+        public abstract GraphType Type {
+            get;
         }
 
         /// <summary>
-        /// Gets the node lookup.
+        /// Sets the url property on the graph.
         /// </summary>
-        /// <value>The node lookup.</value>
-        public INodeTracker NodeLookup
+        /// <value>The URL to set on the graph.</value>
+        public string Url
         {
-            get { return nodeTracker; }
+            get { return GetAttributeValue<LabelAttribute, string>(); }
+            set { SetAttribute(value, () => new LabelAttribute(value)); }
         }
 
         /// <summary>
-        /// Adds the specified node to the grpah.
+        /// Sets the background color of the graph.
         /// </summary>
-        /// <param name="node">The node to add to the graph.</param>
-        public void AddNode(IGraphNode node) {
-
-            if (node == null)
-            {
-                throw new ArgumentException("Invalid graph node specified.", "node");
-            }
-
-            nodeTracker.AddNode(node);
-            nodes.Add(node);
-        }
-
-        /// <summary>
-        /// Gets a readonly collection of the edges currently in the graph.
-        /// </summary>
-        /// <value>The edges in the graph.</value>
-        public IEnumerable<IEdge> Edges
+        /// <value>The color to set the background to.</value>
+        public Color? BackgroundColor
         {
-            get { return edges; }
+            get { return GetAttributeValue<BackgroundColorAttribute, Color?>(); }
+            set { SetAttribute(value, () => new BackgroundColorAttribute(value.Value));}
         }
 
         /// <summary>
-        /// Adds the specified edge to the graph.
+        /// Sets the graph as concentrated - that is, to use edge concentrators.
         /// </summary>
-        /// <param name="edge">The edge to add to the graph.</param>
-        public void AddEdge(IEdge edge)
+        /// <value><c>true</c> if concentrate; otherwise, <c>false</c>.</value>
+        public bool Concentrate
         {
-            if (edge == null)
-            {
-                throw new ArgumentException("Invalid edge specified.", "edge");
-            }
-
-            edgeTracker.AddEdge(edge);
-            edges.Add(edge);
+            get { return GetAttributeValue<ConcentrateAttribute, bool>(false); }
+            set { SetAttribute(value, false, () => new ConcentrateAttribute(value)); }
         }
 
         /// <summary>
-        /// Gets the edge lookup.
+        /// Sets whether the the graph should be centered on the canvase.  The default is <c>false</c>.
         /// </summary>
-        /// <value>The edge lookup.</value>
-        public IEdgeTracker EdgeLookup
+        /// <value>
+        /// 	<c>true</c> if the graph should be centered on the canvas; otherwise, <c>false</c>.
+        /// </value>
+        public bool CenterOnCanvas {
+            get { return GetAttributeValue<CenterAttribute, bool>(false); }
+            set { SetAttribute(value, false, () => new CenterAttribute(value)); }
+        }
+
+        /// <summary>
+        /// Sets the font name that is used to label the graph.
+        /// </summary>
+        /// <value></value>
+        /// <param name="value">Name of the font to use.</param>
+        public string FontName
         {
-            get { return edgeTracker; }
+            get { return GetAttributeValue<FontNameAttribute, string>(); }
+            set { SetAttribute(value, () => new FontNameAttribute(value)); }
         }
 
         /// <summary>
-        /// Adds the sub graph to the graph.
+        /// Sets the font size that is used to label the graph.
         /// </summary>
-        /// <param name="subGraph">The sub graph to add.</param>
-        public void AddSubGraph(ISubGraph subGraph)
+        /// <value>The size of the font.</value>
+        public double? FontSize
         {
-            subGraphTracker.AddSubGraph(subGraph);
+            get { return GetAttributeValue<FontSizeAttribute, double>(); }
+            set { SetAttribute(value, () => new FontSizeAttribute(value.Value)); }
         }
 
-        /// <summary>
-        /// Gets the cluster lookup.
-        /// </summary>
-        /// <value>The cluster lookup.</value>
-        public ISubGraphTracker SubGraphLookup
-        {
-            get { return subGraphTracker; }
-        }
-
-        /// <summary>
-        /// Gets or sets the node defaults.
-        /// </summary>
-        /// <value>The node defaults.</value>
-        public IEntityDefaults NodeDefaults {
-            get { return nodeDefaults; }
-        }
-
-        /// <summary>
-        /// Gets or sets the edge defaults.
-        /// </summary>
-        /// <value>The edge defaults.</value>
-        public IEntityDefaults EdgeDefaults {
-            get { return edgeDefaults; }
-        }
-
-        /// <summary>
-        /// Gets the conventions.
-        /// </summary>
-        /// <value>The conventions.</value>
-        public IConventionTracker Conventions {
-            get { return conventionTracker; }
-        }
-
-        /// <summary>
-        /// Sets the node defaults.
-        /// </summary>
-        /// <param name="template">The template.</param>
-        public void SetNodeDefaults(IGraphNode template)
-        {
-            nodeDefaults = new NodeDefaults(template);
-        }
-
-        /// <summary>
-        /// Sets the edge defaults.
-        /// </summary>
-        /// <param name="template">The template.</param>
-        public void SetEdgeDefaults(IEdge template)
-        {
-            edgeDefaults = new EdgeDefaults(template);
-        }
+        
 
         #endregion
 
@@ -216,73 +133,53 @@ namespace FluentDot.Entities.Graphs
         /// <returns>
         /// A textual Dot representation of this element.
         /// </returns>
-        public virtual string ToDot()
-        {
-            var sb = new StringBuilder();
-
-            sb.Append(GraphIndicator).Append(" \"").Append(Name).Append("\"");
-
-            sb.AppendLine(" {");
-
-            var attributes = Attributes;
-
-            if (attributes.CurrentAttributes.Count > 0) {
-                sb.Append("graph ").Append(attributes.ToDot()).AppendLine(";").AppendLine();
-            }
-
-            WriteDefaults(sb);
-            WriteClusters(sb);
-            WriteNodes(sb);
-            WriteEdges(sb);
-            sb.Append("}");
-
-            return sb.ToString();
+        public string ToDot() {
+            return graphBuilder.ToDot();
         }
-        
-        #endregion
-
-        #region Protected Members
-
-        /// <summary>
-        /// Gets the graph indicator.
-        /// </summary>
-        /// <value>The graph indicator.</value>
-        protected abstract string GraphIndicator { get; }
 
         #endregion
 
         #region Private Members
+        
+        /// <summary>
+        /// Sets the attribute on the builder.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
+        /// <param name="value">The attribute to set.</param>
+        /// <param name="attribute">The attribute.</param>
+        private void SetAttribute<TValue, TAttribute>(TValue value, Func<TAttribute> attribute) where TAttribute : IDotAttribute
+        {
+            SetAttribute(value, null, attribute);
+        }
 
-        private void WriteDefaults(StringBuilder sb) {
-            if ((nodeDefaults != null) && (nodeDefaults.AttributeCount > 0))
+        /// <summary>
+        /// Sets the attribute on the builder.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
+        /// <param name="value">The attribute to set.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="attribute">The attribute.</param>
+        private void SetAttribute<TValue, TAttribute>(TValue value, object defaultValue, Func<TAttribute> attribute) where TAttribute : IDotAttribute {
+            if (Equals(value, defaultValue)) 
             {
-                sb.Append(nodeDefaults.ToDot()).AppendLine(";");
-            }
-
-            if ((edgeDefaults != null) && (edgeDefaults.AttributeCount > 0))
+                graphBuilder.Attributes.Remove<TAttribute>();
+            } 
+            else 
             {
-                sb.Append(edgeDefaults.ToDot()).AppendLine(";");
+                graphBuilder.Attributes.AddAttribute(attribute());
             }
         }
-
-        private void WriteClusters(StringBuilder sb) {
-            foreach (var cluster in subGraphTracker.Clusters) {
-                sb.AppendLine(cluster.ToDot());
-            }
+        
+        private V GetAttributeValue<T, V>() where T: class, IDotAttribute
+        {
+            return GetAttributeValue<T, V>(default(V));
         }
 
-        private void WriteNodes(StringBuilder sb) {
-            foreach (var node in nodes) {
-                conventionTracker.ApplyConventions(node);
-                sb.Append(node.ToDot()).AppendLine(";");
-            }
-        }
-
-        private void WriteEdges(StringBuilder sb) {
-            foreach (var edge in edges) {
-                conventionTracker.ApplyConventions(edge);
-                sb.Append(edge.ToDot()).AppendLine(";");
-            }
+        private V GetAttributeValue<T, V>(V defaultValue) where T : class, IDotAttribute {
+            var attribute = graphBuilder.Attributes.GetAttribute<T>();
+            return attribute != null ? (V)attribute.Value : defaultValue;
         }
 
         #endregion

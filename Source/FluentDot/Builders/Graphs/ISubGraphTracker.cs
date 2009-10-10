@@ -7,8 +7,9 @@
 */
 
 using System.Collections.Generic;
+using FluentDot.Entities.Graphs;
 
-namespace FluentDot.Entities.Graphs
+namespace FluentDot.Builders.Graphs
 {
     /// <summary>
     /// Provides tracking for sub graphs.

@@ -80,7 +80,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithURL(string url)
         {
-            graph.Attributes.AddAttribute(new LabelAttribute(url));
+            graph.Url = url;
             return this;
         }
 
@@ -91,7 +91,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithBackgroundColor(Color color)
         {
-            graph.Attributes.AddAttribute(new BackgroundColorAttribute(color));
+            graph.BackgroundColor = color;
             return this;
         }
 
@@ -101,7 +101,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression Concentrate()
         {
-            graph.Attributes.AddAttribute(new ConcentrateAttribute(true));
+            graph.Concentrate = true;
             return this;
         }
 
@@ -111,7 +111,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression CenterOnCanvas()
         {
-            graph.Attributes.AddAttribute(new CenterAttribute(true));
+            graph.CenterOnCanvas = true;
             return this;
         }
 
@@ -122,7 +122,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithFontName(string fontName)
         {
-            graph.Attributes.AddAttribute(new FontNameAttribute(fontName));
+            graph.FontName = fontName;
             return this;
         }
 
@@ -133,7 +133,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithFontSize(double fontSize)
         {
-            graph.Attributes.AddAttribute(new FontSizeAttribute(fontSize));
+            graph.FontSize = fontSize;
             return this;
         }
 

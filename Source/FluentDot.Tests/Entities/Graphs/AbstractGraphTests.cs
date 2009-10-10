@@ -7,115 +7,116 @@
 */
 
 using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using FluentDot.Attributes;
-using FluentDot.Entities.Edges;
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Graphs;
-using FluentDot.Entities.Nodes;
 using NUnit.Framework;
 using Rhino.Mocks;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Drawing;
 
-namespace FluentDot.Tests.Entities.Graphs
-{
+namespace FluentDot.Tests.Entities.Graphs {
+
     [TestFixture]
     public class AbstractGraphTests {
 
         #region Tests
 
         [Test]
-        public void AddNode_Should_Add_Node_To_Node_Collection()
+        public void ToDot_Should_Call_Builders_ToDot()
         {
             var graph = new TestGraph();
-            graph.AddNode(new GraphNode("a"));
+            graph.GraphBuilder.Expect(x => x.ToDot()).Return("SampleDot");
 
-            Assert.AreEqual(graph.Nodes.Count(), 1);
-            Assert.AreEqual(graph.Nodes.First().Name, "a");
+            var result = graph.ToDot();
+
+            graph.GraphBuilder.VerifyAllExpectations();
+            Assert.AreEqual(result, "SampleDot");
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddNode_Should_Throw_If_Node_Null() {
-            new TestGraph().AddNode(null);
-        }
-
-
-        [Test]
-        public void AddEdge_Should_Add_Edge_To_Edge_Collection() {
-
-            var node1 = MockRepository.GenerateMock<IGraphNode>();
-            var node2 = MockRepository.GenerateMock<IGraphNode>();
-            var edge = new DirectedEdge(new NodeTarget(node1), new NodeTarget(node2));
-
-            var graph = new TestGraph();
-
-            graph.AddEdge(edge);
-
-            Assert.AreEqual(graph.Edges.Count(), 1);
-            Assert.AreSame(graph.Edges.First(), edge);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddEdge_Should_Throw_If_edge_Null() {
-            new TestGraph().AddEdge(null);
-        }
-
-        [Test]
-        public void ToDot_Should_Append_Nodes()
+        public void Url_CanGetAndSet()
         {
-            var graph = new TestGraph();
-            graph.AddNode(new GraphNode("a"));
-            graph.AddNode(new GraphNode("b"));
-
-            string dot = graph.ToDot();
-            Assert.IsTrue(dot.Contains(graph.Nodes.First().Attributes.ToDot() + Environment.NewLine));
-            Assert.IsTrue(dot.Contains(graph.Nodes.Skip(1).First().Attributes.ToDot() + Environment.NewLine));
+            AssertPropertyValid(x => x.Url, "bla");
         }
 
         [Test]
-        public void ToDot_Should_Add_Attributes_To_Graph()
+        public void BackgroundColor_CanGetAndSet()
         {
-            var attribute = MockRepository.GenerateMock<IDotAttribute>();
-            attribute.Expect(x => x.ToDot()).Return("a=bb");
-
-            var graph = new TestGraph {Name = "a"};
-            graph.Attributes.AddAttribute(attribute);
-
-            string dot = graph.ToDot();
-
-            attribute.VerifyAllExpectations();
-
-            Assert.IsTrue(Regex.Match(dot, "^testGraph \\\"a\\\" {[^}]*graph \\[a=bb\\][^}]*}$", RegexOptions.Multiline).Success);
+            AssertPropertyValid(x => x.BackgroundColor, Color.DarkBlue);
+            AssertPropertyValid(x => x.BackgroundColor, null);
         }
-       
 
         [Test]
-        public void AddCluster_Should_Add_Cluster()
+        public void Concentrate_CanGetAndSet()
         {
-            var cluster = MockRepository.GenerateMock<ICluster>();
-            cluster.Expect(x => x.Name).Return("a");
+            AssertPropertyValid(x => x.Concentrate, false, true);
+            AssertPropertyValid(x => x.Concentrate, false, false);
+        }
 
-            var graph = new TestGraph();
-            graph.AddSubGraph(cluster);
+        [Test]
+        public void CenterOnCanvas_CanGetAndSet() {
+            AssertPropertyValid(x => x.CenterOnCanvas, false, true);
+            AssertPropertyValid(x => x.CenterOnCanvas, false, false);
+        }
 
-            Assert.AreEqual(graph.SubGraphLookup.Clusters.Count(), 1);
-            Assert.AreEqual(graph.SubGraphLookup.Clusters.First(), cluster);
+        [Test]
+        public void FontName_CanGetAndSet() {
+            AssertPropertyValid(x => x.FontName, "ss");
+            AssertPropertyValid(x => x.FontName, null);
+        }
+
+        [Test]
+        public void FontSize_CanGetAndSet() {
+            AssertPropertyValid(x => x.FontSize, 3.2);
+            AssertPropertyValid(x => x.FontSize, null);
         }
 
         #endregion
 
         #region Private Members
 
-        private class TestGraph : AbstractGraph
+        private static void AssertPropertyValid<T>(Expression<Func<IGraph, T>> propertyExpression, T testValue)
         {
-            public override GraphType Type
+            AssertPropertyValid(propertyExpression, null, testValue);
+        }
+
+        private static void AssertPropertyValid<T>(Expression<Func<IGraph, T>> propertyExpression, object defaultValue, T testValue)
+        {
+            MemberExpression memberExpression = null;
+            
+            if (propertyExpression.Body.NodeType == ExpressionType.MemberAccess) {
+                memberExpression = propertyExpression.Body as MemberExpression;
+            }
+            
+            if (memberExpression == null)
             {
-                get { return GraphType.Undirected; }
+                Assert.Fail("Could not determine property member.");
             }
 
-            protected override string GraphIndicator {
-                get { return "testGraph"; }
+            var propertyInfo = (PropertyInfo)memberExpression.Member;
+            var testGraph = new TestGraph(new GraphBuilder("aa"));
+
+            Assert.AreEqual(propertyInfo.GetValue(testGraph, null), defaultValue);
+            propertyInfo.SetValue(testGraph, testValue, null);
+            Assert.AreEqual(propertyInfo.GetValue(testGraph, null), testValue);
+        }
+
+        private class TestGraph : AbstractGraph {
+
+            public TestGraph() : this(MockRepository.GenerateMock<IGraphBuilder>())
+            {
+               
+            }
+
+            public TestGraph(IGraphBuilder builder)  : base(builder) {
+                GraphBuilder = builder;
+            }
+
+            public IGraphBuilder GraphBuilder { get; private set; }
+
+            public override GraphType Type {
+                get { return GraphType.Directed; }
             }
         }
 

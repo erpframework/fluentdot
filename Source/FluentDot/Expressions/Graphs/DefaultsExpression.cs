@@ -6,6 +6,7 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Edges;
 using FluentDot.Entities.Graphs;
 using FluentDot.Entities.Nodes;

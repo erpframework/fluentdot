@@ -8,6 +8,7 @@
 
 using System;
 using FluentDot.Attributes.Graphs;
+using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Graphs;
 using FluentDot.Expressions.Edges;
 using FluentDot.Expressions.Nodes;

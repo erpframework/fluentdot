@@ -47,6 +47,38 @@ namespace FluentDot.Attributes
             get { return attributes.Values.ToList(); }
         }
 
+        /// <summary>
+        /// Gets the attribute by type.
+        /// </summary>
+        /// <typeparam name="T">The type of attribute.</typeparam>
+        /// <returns>
+        /// The attribute instance, if found, else null.
+        /// </returns>
+        public T GetAttribute<T>() where T : IDotAttribute
+        {
+            IDotAttribute attribute;
+            
+            if (attributes.TryGetValue(typeof(T), out attribute)) {
+                return (T) attribute;
+            }
+
+            return default(T);
+        }
+
+        /// <summary>
+        /// Removes an attribute of this type, if found.
+        /// </summary>
+        /// <typeparam name="T">The type of attirbute to remove.</typeparam>
+        public void Remove<T>() where T : IDotAttribute
+        {
+            Type type = typeof(T);
+
+            if (attributes.ContainsKey(type))
+            {
+                attributes.Remove(type);
+            }
+        }
+
         #endregion
 
         #region IDotElement Members

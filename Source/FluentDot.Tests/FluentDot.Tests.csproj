@@ -155,7 +155,7 @@
     <Compile Include="Common\StringEnumTests.cs" />
     <Compile Include="Conventions\ConventionTrackerTests.cs" />
     <Compile Include="Entities\EntityDefaultsBaseTests.cs" />
-    <Compile Include="Entities\Graphs\AbstractGraphTests.cs" />
+    <Compile Include="Builders\Graphs\GraphBuilderTests.cs" />
     <Compile Include="Attributes\AbstractDotAttributeTests.cs" />
     <Compile Include="Attributes\AttributeCollectionTests.cs" />
     <Compile Include="Attributes\Shared\ColorAttributeTests.cs" />
@@ -163,8 +163,9 @@
     <Compile Include="Attributes\Shared\LabelAttributeTests.cs" />
     <Compile Include="Attributes\Edges\ArrowDirectionTests.cs" />
     <Compile Include="Attributes\Edges\ArrowShapeTests.cs" />
+    <Compile Include="Entities\Graphs\AbstractGraphTests.cs" />
     <Compile Include="Entities\Graphs\ClusterTests.cs" />
-    <Compile Include="Entities\Graphs\SubGraphTrackerTests.cs" />
+    <Compile Include="Builders\Graphs\SubGraphTrackerTests.cs" />
     <Compile Include="Attributes\Edges\CompositeArrowShapeTests.cs" />
     <Compile Include="Entities\Edges\DirectedEdgeTests.cs" />
     <Compile Include="Entities\Graphs\DirectedGraphTests.cs" />

@@ -38,6 +38,25 @@ namespace FluentDot.Attributes.Shared
         /// <value>The value.</value>
         public Color Value { get; private set; }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="FluentDot.Attributes.Shared.ColorValue"/> to <see cref="System.Drawing.Color"/>.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator Color(ColorValue instance)
+        {
+            return instance.Value;
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.Drawing.Color"/> to <see cref="FluentDot.Attributes.Shared.ColorValue"/>.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator ColorValue(Color instance) {
+            return new ColorValue(instance);
+        }
+
         #endregion
 
         #region IDotElement Members
