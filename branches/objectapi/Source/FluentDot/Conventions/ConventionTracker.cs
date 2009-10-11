@@ -8,10 +8,9 @@
 
 using System.Collections.Generic;
 using System;
+using System.Collections.ObjectModel;
 using FluentDot.Entities.Edges;
 using FluentDot.Entities.Nodes;
-using FluentDot.Expressions.Nodes;
-using FluentDot.Expressions.Edges;
 
 namespace FluentDot.Conventions
 {
@@ -66,11 +65,10 @@ namespace FluentDot.Conventions
             for (int i = 0; i< nodeConventions.Count; i++)
             {
                 var convention = nodeConventions[i];
-                var nodeInfo = new NodeInfo(node.Name, node.Tag);
 
-                if (convention.ShouldApply(nodeInfo))
+                if (convention.ShouldApply(node))
                 {
-                    convention.Apply(nodeInfo, new NodeExpression(node));
+                    convention.Apply(node);
                 }
             }
         }
@@ -84,11 +82,10 @@ namespace FluentDot.Conventions
             for (int i = 0; i < edgeConventions.Count; i++)
             {
                 var convention = edgeConventions[i];
-                var edgeInfo = new EdgeInfo(edge);
-                    
-                if (convention.ShouldApply(edgeInfo))
+                
+                if (convention.ShouldApply(edge))
                 {
-                    convention.Apply(edgeInfo, new EdgeExpression(edge));
+                    convention.Apply(edge);
                 }
             }
         }
@@ -101,13 +98,13 @@ namespace FluentDot.Conventions
         /// Gets the edge conventions.
         /// </summary>
         /// <value>The edge conventions.</value>
-        public IList<IEdgeConvention> EdgeConventions { get { return edgeConventions; } }
+        public IList<IEdgeConvention> EdgeConventions { get { return new ReadOnlyCollection<IEdgeConvention>(edgeConventions); } }
 
         /// <summary>
         /// Gets the node conventions.
         /// </summary>
         /// <value>The node conventions.</value>
-        public IList<INodeConvention> NodeConventions { get { return nodeConventions; } }
+        public IList<INodeConvention> NodeConventions { get { return new ReadOnlyCollection<INodeConvention>(nodeConventions); } }
 
         #endregion
     }

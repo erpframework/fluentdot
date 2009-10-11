@@ -6,27 +6,15 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
-using FluentDot.Expressions.Nodes;
+using FluentDot.Entities.Nodes;
 
 namespace FluentDot.Conventions
 {
     /// <summary>
     /// A convention setter for nodes.
     /// </summary>
-    public interface INodeConvention : IConvention
+    public interface INodeConvention : IConvention<IGraphNode>
     {
-        /// <summary>
-        /// Determines whether the configuration in the Apply method should be applied to this node instance.
-        /// </summary>
-        /// <param name="nodeInfo">Information on the node currently being inspected.</param>
-        /// <returns></returns>
-        bool ShouldApply(INodeInfo nodeInfo);
-
-        /// <summary>
-        /// Applies the specified node configuration to the node in question.
-        /// </summary>
-        /// <param name="nodeInfo">Information on the node currently being inspected.</param>
-        /// <param name="nodeConfig">The expression for node configuration.</param>
-        void Apply(INodeInfo nodeInfo, INodeExpression nodeConfig);
+        
     }
 }

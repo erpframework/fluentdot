@@ -14,6 +14,9 @@ using Rhino.Mocks;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Drawing;
+using FluentDot.Attributes.Graphs;
+using FluentDot.Attributes.Shared;
+using FluentDot.Attributes;
 
 namespace FluentDot.Tests.Entities.Graphs {
 
@@ -38,6 +41,7 @@ namespace FluentDot.Tests.Entities.Graphs {
         public void Url_CanGetAndSet()
         {
             AssertPropertyValid(x => x.Url, "bla");
+            AssertPropertyValid(x => x.Url, null);
         }
 
         [Test]
@@ -70,6 +74,145 @@ namespace FluentDot.Tests.Entities.Graphs {
         public void FontSize_CanGetAndSet() {
             AssertPropertyValid(x => x.FontSize, 3.2);
             AssertPropertyValid(x => x.FontSize, null);
+        }
+
+        [Test]
+        public void FontColor_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.FontColor, Color.Beige);
+            AssertPropertyValid(x => x.FontColor, null);
+        }
+
+        [Test]
+        public void Label_CanGetAndSet() {
+            AssertPropertyValid(x => x.Label, "label");
+            AssertPropertyValid(x => x.Label, null);
+        }
+
+        [Test]
+        public void LabelJustification_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.LabelJustification, Justification.Center);
+            AssertPropertyValid(x => x.LabelJustification, null);
+        }
+
+        [Test]
+        public void LabelLocation_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.LabelLocation, Location.Bottom);
+            AssertPropertyValid(x => x.LabelLocation, null);
+        }
+
+        [Test]
+        public void Margin_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.Margin, new PointValue(10, 15));
+            AssertPropertyValid(x => x.Margin, null);
+        }
+
+        [Test]
+        public void EdgeOrdering_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.EdgeOrdering, Ordering.In);
+            AssertPropertyValid(x => x.EdgeOrdering, null);
+        }
+
+        [Test]
+        public void Rotation_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.Rotation, 180);
+            AssertPropertyValid(x => x.Rotation, null);
+        }
+
+        [Test]
+        public void MinimumNodeSeperation_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.MinimumNodeSeperation, 1.1);
+            AssertPropertyValid(x => x.MinimumNodeSeperation, null);
+        }
+
+        [Test]
+        public void NoJustify_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.NoJustify, true);
+            AssertPropertyValid(x => x.NoJustify, false);
+        }
+
+        [Test]
+        public void OutputOrder_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.OutputOrder, OutputMode.BreadthFirst);
+            AssertPropertyValid(x => x.OutputOrder, null);
+        }
+
+        [Test]
+        public void PageSize_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.PageSize, new PointValue(3, 4));
+            AssertPropertyValid(x => x.PageSize, null);
+        }
+
+        [Test]
+        public void PageDirection_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.PageDirection, PageDirection.BottomToTopRightToLeft);
+            AssertPropertyValid(x => x.PageDirection, null);
+        }
+
+        [Test]
+        public void Ratio_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.Ratio, new RatioType(3));
+            AssertPropertyValid(x => x.Ratio, null);
+        }
+
+        [Test]
+        public void Comment_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.Comment, "aa");
+            AssertPropertyValid(x => x.Comment, null);
+        }
+
+        [Test]
+        public void Aspect_CanGetAndSet() {
+            AssertPropertyValid(x => x.Aspect, new AspectValue(4));
+            AssertPropertyValid(x => x.Aspect, null);
+        }
+
+        [Test]
+        public void RankDirection_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.RankDirection, RankDirection.BottomToTop);
+            AssertPropertyValid(x => x.RankDirection, null);
+        }
+
+        [Test]
+        public void Compound_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.Compound, true);
+            AssertPropertyValid(x => x.Compound, false);
+        }
+
+        [Test]
+        public void RankSeperation_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.RankSeperation, new RankSeperation(2.0, true));
+            AssertPropertyValid(x => x.RankSeperation, null);
+        }
+
+        [Test]
+        public void AddCustomAttribute_Adds_Attribute_To_Builder()
+        {
+            var attribute = MockRepository.GenerateMock<IDotAttribute>();
+            var attributeCollection = MockRepository.GenerateMock<IAttributeCollection>();
+            
+            var graph = new TestGraph();
+            graph.GraphBuilder.Expect(x => x.Attributes).Return(attributeCollection);
+            attributeCollection.Expect(x => x.AddAttribute(attribute));
+
+            graph.AddCustomAttribute(attribute);
+
+            attributeCollection.VerifyAllExpectations();
         }
 
         #endregion

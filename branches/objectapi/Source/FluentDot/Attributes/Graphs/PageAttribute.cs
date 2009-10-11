@@ -21,10 +21,20 @@ namespace FluentDot.Attributes.Graphs {
         /// <summary>
         /// Initializes a new instance of the <see cref="PageAttribute"/> class.
         /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public PageAttribute(float x, float y) : base("page", new PointValue(x, y), true) {
+        /// <param name="value">The value.</param>
+        public PageAttribute(PointValue value)
+            : base("page", value, true)
+        {
 
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PageAttribute"/> class.
+        /// </summary>
+        /// <param name="x">The x value.</param>
+        /// <param name="y">The y value.</param>
+        public PageAttribute(float x, float y) : this(new PointValue(x, y)) {
+            
         }
 
         #endregion

@@ -20,5 +20,15 @@ namespace FluentDot.Tests.Attributes.Shared
             Assert.AreEqual(new BooleanValue(true).ToDot(), "true");
             Assert.AreEqual(new BooleanValue(false).ToDot(), "false");
         }
+        
+        [Test]
+        public void Can_Cast_To_Boolean() {
+            Assert.AreEqual((bool)new BooleanValue(true), true);
+        }
+
+        [Test]
+        public void Can_Cast_From_Color() {
+            Assert.AreEqual(((BooleanValue)false).Value, false);
+        }
     }
 }
