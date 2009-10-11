@@ -6,12 +6,25 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
+using FluentDot.Attributes.Graphs;
+
 namespace FluentDot.Entities.Graphs
 {
     /// <summary>
     /// A subgraph that is contained within a graph.
     /// </summary>
-    public interface ISubGraph : IGraph
+    public interface ISubGraph : IGraphContainer
     {
+        /// <summary>
+        /// Gets the parent of the sub graph.
+        /// </summary>
+        /// <value>The parent of the sub graph.</value>
+        IGraph Parent { get; }
+
+        /// <summary>
+        /// Specifies the rank type for this subgraph.
+        /// </summary>
+        /// <value>The rank of the subgraph.</value>
+        RankType Rank { get; set; }
     }
 }

@@ -437,7 +437,7 @@ namespace FluentDot.Expressions.Graphs
         /// <value>The conventions this graph should follow.</value>
         public IConventionCollectionModifiersExpression<IGraphExpression> Conventions
         {
-            get { return new ConventionCollectionModifiersExpression<IGraphExpression>(this, graph.Conventions); }
+            get { return new ConventionCollectionModifiersExpression<IGraphExpression>(this, graph); }
         }
 
         /// <summary>

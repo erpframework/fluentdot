@@ -10,12 +10,11 @@
 using System.Collections.Generic;
 using FluentDot.Entities.Graphs;
 
-namespace FluentDot.Builders.Graphs
-{
+namespace FluentDot.Builders.Graphs {
     /// <summary>
     /// A concrete implementation of an <see cref="ISubGraphTracker"/>.
     /// </summary>
-    public class SubGraphTracker : ISubGraphTracker {
+    internal class SubGraphTracker : ISubGraphTracker {
 
         #region Globals
 
@@ -26,21 +25,19 @@ namespace FluentDot.Builders.Graphs
         #region ISubGraphTracker Members
 
         /// <summary>
-        /// Gets the clusters.
+        /// Gets the subgraphs tracked by this instance.
         /// </summary>
-        /// <value>The clusters.</value>
-        public IEnumerable<ISubGraph> Clusters
-        {
+        /// <value>The subgraphs tracked by this instance.</value>
+        public IEnumerable<ISubGraph> SubGraphs {
             get { return subGraphs.Values; }
         }
 
         /// <summary>
-        /// Adds the cluster to the collection of clusters.
+        /// Adds the sub graph to the collection of sub graphs.
         /// </summary>
-        /// <param name="cluster">The cluster to add to the collection.</param>
-        public void AddSubGraph(ISubGraph cluster)
-        {
-            subGraphs.Add(cluster.Name, cluster);
+        /// <param name="subGraph">The sub graph to add to the collection.</param>
+        public void AddSubGraph(ISubGraph subGraph) {
+            subGraphs.Add(subGraph.Name, subGraph);
         }
 
         #endregion

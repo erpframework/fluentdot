@@ -19,14 +19,9 @@ namespace FluentDot.Conventions
         /// <summary>
         /// Adds the specified convention to the tracker.
         /// </summary>
-        /// <param name="convention">The convention to add to this instance.</param>
-        void AddConvention(IEdgeConvention convention);
-
-        /// <summary>
-        /// Adds the specified convention to the tracker.
-        /// </summary>
-        /// <param name="convention">The convention to add to this instance.</param>
-        void AddConvention(INodeConvention convention);
+        /// <typeparam name="T">The type of entity the convention is applied to.</typeparam>
+        /// <param name="convention">The convention to add.</param>
+        void AddConvention<T>(IConvention<T> convention);
         
         /// <summary>
         /// Applies the known conventions to the specified node.

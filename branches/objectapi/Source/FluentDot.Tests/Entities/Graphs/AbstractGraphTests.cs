@@ -7,16 +7,17 @@
 */
 
 using System;
-using FluentDot.Builders.Graphs;
-using FluentDot.Entities.Graphs;
-using NUnit.Framework;
-using Rhino.Mocks;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Drawing;
+using System.Linq.Expressions;
 using FluentDot.Attributes.Graphs;
 using FluentDot.Attributes.Shared;
-using FluentDot.Attributes;
+using FluentDot.Builders.Graphs;
+using FluentDot.Conventions;
+using FluentDot.Entities.Graphs;
+using FluentDot.Tests.Util;
+using NUnit.Framework;
+using Rhino.Mocks;
+using Rhino.Mocks.Constraints;
 
 namespace FluentDot.Tests.Entities.Graphs {
 
@@ -24,18 +25,6 @@ namespace FluentDot.Tests.Entities.Graphs {
     public class AbstractGraphTests {
 
         #region Tests
-
-        [Test]
-        public void ToDot_Should_Call_Builders_ToDot()
-        {
-            var graph = new TestGraph();
-            graph.GraphBuilder.Expect(x => x.ToDot()).Return("SampleDot");
-
-            var result = graph.ToDot();
-
-            graph.GraphBuilder.VerifyAllExpectations();
-            Assert.AreEqual(result, "SampleDot");
-        }
 
         [Test]
         public void Url_CanGetAndSet()
@@ -152,6 +141,7 @@ namespace FluentDot.Tests.Entities.Graphs {
             AssertPropertyValid(x => x.PageSize, null);
         }
 
+
         [Test]
         public void PageDirection_CanGetAndSet()
         {
@@ -199,20 +189,49 @@ namespace FluentDot.Tests.Entities.Graphs {
             AssertPropertyValid(x => x.RankSeperation, new RankSeperation(2.0, true));
             AssertPropertyValid(x => x.RankSeperation, null);
         }
+        
 
         [Test]
-        public void AddCustomAttribute_Adds_Attribute_To_Builder()
+        public void AddConvention_Adds_Convention_To_Builder()
         {
-            var attribute = MockRepository.GenerateMock<IDotAttribute>();
-            var attributeCollection = MockRepository.GenerateMock<IAttributeCollection>();
-            
+            var conventionTracker = MockRepository.GenerateMock<IConventionTracker>();
+            var convention = MockRepository.GenerateMock<IEdgeConvention>();
+
             var graph = new TestGraph();
-            graph.GraphBuilder.Expect(x => x.Attributes).Return(attributeCollection);
-            attributeCollection.Expect(x => x.AddAttribute(attribute));
+            graph.Builder.Expect(x => x.Conventions).Return(conventionTracker);
+            conventionTracker.Expect(x => x.AddConvention(convention));
 
-            graph.AddCustomAttribute(attribute);
+            graph.AddConvention(convention);
 
-            attributeCollection.VerifyAllExpectations();
+            conventionTracker.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void AddSubGraph_Should_Create_And_Add_SubGraph()
+        {
+            var graph = new TestGraph();
+            var subgraphTracker = MockRepository.GenerateMock<ISubGraphTracker>();
+
+            graph.Builder.Expect(x => x.SubGraphLookup).Return(subgraphTracker);
+            subgraphTracker.Expect(x => x.AddSubGraph(null)).Constraints(Is.NotNull());
+
+            ISubGraph subgraph = graph.AddSubGraph();
+            Assert.IsNotNull(subgraph);
+            Assert.AreSame(subgraph.Parent, graph);
+        }
+
+        [Test]
+        public void AddCluster_Should_Create_And_Add_Cluster()
+        {
+            var graph = new TestGraph();
+            var subgraphTracker = MockRepository.GenerateMock<ISubGraphTracker>();
+
+            graph.Builder.Expect(x => x.SubGraphLookup).Return(subgraphTracker);
+            subgraphTracker.Expect(x => x.AddSubGraph(null)).Constraints(Is.NotNull());
+
+            ICluster cluster = graph.AddCluster();
+            Assert.IsNotNull(cluster);
+            Assert.AreSame(cluster.Parent, graph);
         }
 
         #endregion
@@ -226,23 +245,8 @@ namespace FluentDot.Tests.Entities.Graphs {
 
         private static void AssertPropertyValid<T>(Expression<Func<IGraph, T>> propertyExpression, object defaultValue, T testValue)
         {
-            MemberExpression memberExpression = null;
-            
-            if (propertyExpression.Body.NodeType == ExpressionType.MemberAccess) {
-                memberExpression = propertyExpression.Body as MemberExpression;
-            }
-            
-            if (memberExpression == null)
-            {
-                Assert.Fail("Could not determine property member.");
-            }
-
-            var propertyInfo = (PropertyInfo)memberExpression.Member;
             var testGraph = new TestGraph(new GraphBuilder("aa"));
-
-            Assert.AreEqual(propertyInfo.GetValue(testGraph, null), defaultValue);
-            propertyInfo.SetValue(testGraph, testValue, null);
-            Assert.AreEqual(propertyInfo.GetValue(testGraph, null), testValue);
+            PropertyTester.AssertPropertyValid(testGraph, propertyExpression, defaultValue, testValue);
         }
 
         private class TestGraph : AbstractGraph {
@@ -253,11 +257,9 @@ namespace FluentDot.Tests.Entities.Graphs {
             }
 
             public TestGraph(IGraphBuilder builder)  : base(builder) {
-                GraphBuilder = builder;
+                
             }
-
-            public IGraphBuilder GraphBuilder { get; private set; }
-
+            
             public override GraphType Type {
                 get { return GraphType.Directed; }
             }

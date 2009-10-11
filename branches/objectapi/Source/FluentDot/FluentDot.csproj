@@ -229,6 +229,7 @@
     <Compile Include="Attributes\Edges\ArrowShapeModifier.cs" />
     <Compile Include="Entities\AttributeBasedEntity.cs" />
     <Compile Include="Entities\Graphs\AbstractGraph.cs" />
+    <Compile Include="Entities\Graphs\AbstractGraphContainer.cs" />
     <Compile Include="Entities\Graphs\Cluster.cs" />
     <Compile Include="Entities\Graphs\IGraph.cs" />
     <Compile Include="Builders\Graphs\SubGraphTracker.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Entities\Edges\DirectedEdge.cs" />
     <Compile Include="Attributes\Edges\EdgeStyle.cs" />
     <Compile Include="Entities\Edges\EdgeTracker.cs" />
+    <Compile Include="Entities\Graphs\IGraphContainer.cs" />
     <Compile Include="Entities\Graphs\ISubGraph.cs" />
     <Compile Include="Entities\Graphs\SubGraph.cs" />
     <Compile Include="Entities\Nodes\ElementTracker.cs" />

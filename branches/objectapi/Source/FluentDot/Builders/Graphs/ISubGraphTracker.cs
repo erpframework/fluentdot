@@ -17,10 +17,10 @@ namespace FluentDot.Builders.Graphs
     public interface ISubGraphTracker {
 
         /// <summary>
-        /// Gets the clusters.
+        /// Gets the subgraphs tracked by this instance.
         /// </summary>
-        /// <value>The clusters.</value>
-        IEnumerable<ISubGraph> Clusters { get; }
+        /// <value>The subgraphs tracked by this instance.</value>
+        IEnumerable<ISubGraph> SubGraphs { get; }
 
         /// <summary>
         /// Adds the sub graph to the collection of sub graphs.

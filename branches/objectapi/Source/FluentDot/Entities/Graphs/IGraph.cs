@@ -7,29 +7,16 @@
 */
 
 using System.Drawing;
-using FluentDot.Common;
 using FluentDot.Attributes.Graphs;
 using FluentDot.Attributes.Shared;
-using FluentDot.Attributes;
+using FluentDot.Conventions;
 
 namespace FluentDot.Entities.Graphs {
 
     /// <summary>
     /// A representation of a graph.
     /// </summary>
-    public interface IGraph : IDotElement {
-
-        /// <summary>
-        /// Gets or sets the name of the graph.
-        /// </summary>
-        /// <value>The name.</value>
-        string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of graph this instance represents.
-        /// </summary>
-        /// <value>The type of graph.</value>
-        GraphType Type { get; }
+    public interface IGraph : IGraphContainer {
 
         /// <summary>
         /// Sets the url property on the graph.
@@ -90,12 +77,6 @@ namespace FluentDot.Entities.Graphs {
         /// </summary>
         /// <value>The location of the graph label.</value>
         Location LabelLocation { get; set; }
-
-        /// <summary>
-        /// Adds the custom attribute to the graph.
-        /// </summary>
-        /// <param name="attribute">The attribute to add.</param>
-        void AddCustomAttribute(IDotAttribute attribute);
 
         /// <summary>
         /// Gets or sets the margin for the graph.
@@ -195,5 +176,24 @@ namespace FluentDot.Entities.Graphs {
         /// </summary>
         /// <value>The rank seperation.</value>
         RankSeperation RankSeperation { get; set; }
+
+        /// <summary>
+        /// Adds the specified convention to the graph.
+        /// </summary>
+        /// <typeparam name="T">The type of entity the convention applies to.</typeparam>
+        /// <param name="convention">The convention.</param>
+        void AddConvention<T>(IConvention<T> convention);
+
+        /// <summary>
+        /// Creates and adds a sub graph to the graph.
+        /// </summary>
+        /// <returns>The created subgraph.</returns>
+        ISubGraph AddSubGraph();
+
+        /// <summary>
+        /// Creates and adds a cluster to the graph.
+        /// </summary>
+        /// <returns>The created cluster.</returns>
+        ICluster AddCluster();
     }
 }

@@ -44,7 +44,6 @@ namespace FluentDot.Expressions.Graphs {
         public ISubGraphExpression WithName(string name) {
             var expression = new SubGraphExpression(graph);
             expression.SubGraph.Name = name;
-            graph.AddSubGraph(expression.SubGraph);
             return expression;
         }
 

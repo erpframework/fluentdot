@@ -16,18 +16,11 @@ namespace FluentDot.Expressions.Conventions
     public interface IConventionCollectionSetupExpression
     {
         /// <summary>
-        /// Adds the specified type as a convention.
-        /// </summary>
-        /// <typeparam name="T">The type of convention to add.</typeparam>
-        /// <returns>The current expression instance.</returns>
-        IConventionCollectionSetupExpression AddType<T>() where T : IConvention, new();
-
-        /// <summary>
         /// Adds the specified convention instance to the collection.
         /// </summary>
         /// <typeparam name="T">The type of convention to add.</typeparam>
         /// <param name="instance">The instance of the convention to add.</param>
         /// <returns>The current expression instance.</returns>
-        IConventionCollectionSetupExpression AddInstance<T>(T instance) where T : IConvention;
+        IConventionCollectionSetupExpression Add<T>(IConvention<T> instance);
     }
 }

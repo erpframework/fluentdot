@@ -23,7 +23,7 @@ namespace FluentDot.Expressions.Graphs
         
         #region Globals
 
-        private readonly Cluster cluster;
+        private readonly ICluster cluster;
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace FluentDot.Expressions.Graphs
         /// <param name="graph">The graph.</param>
         public ClusterExpression(IGraph graph)
         {
-            cluster = new Cluster(graph);
+            cluster = graph.AddCluster();
         }
 
         #endregion
@@ -46,7 +46,7 @@ namespace FluentDot.Expressions.Graphs
         /// Gets the cluster.
         /// </summary>
         /// <value>The cluster.</value>
-        public Cluster Cluster {
+        public ICluster Cluster {
             get { return cluster; }
         }
 

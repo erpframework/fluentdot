@@ -7,6 +7,7 @@
 */
 
 using System;
+using FluentDot.Attributes.Graphs;
 using FluentDot.Builders.Graphs;
 
 namespace FluentDot.Entities.Graphs
@@ -14,7 +15,7 @@ namespace FluentDot.Entities.Graphs
     /// <summary>
     /// An implementation of a subgraph.
     /// </summary>
-    public class SubGraph : AbstractGraph, ISubGraph
+    public class SubGraph : AbstractGraphContainer, ISubGraph
     {
         #region Globals
 
@@ -29,8 +30,13 @@ namespace FluentDot.Entities.Graphs
         /// Initializes a new instance of the <see cref="Cluster"/> class.
         /// </summary>
         /// <param name="parentGraph">The parent graph.</param>
-        public SubGraph(IGraph parentGraph)
-            : base( parentGraph.NodeLookup, parentGraph.EdgeLookup, new SubGraphTracker())
+        internal SubGraph(IGraph parentGraph)
+            : base( 
+            new GraphBuilder( 
+                "subgraph",  
+                parentGraph.GraphBuilder.NodeLookup,
+                parentGraph.GraphBuilder.EdgeLookup, 
+                new SubGraphTracker()))
         {
             subGraphType = parentGraph.Type;
             Name = Guid.NewGuid().ToString("N");
@@ -39,7 +45,7 @@ namespace FluentDot.Entities.Graphs
         
         #endregion
 
-        #region AbstractGraph Members
+        #region ISubGraph Members
 
         /// <summary>
         /// Gets or sets the type of graph this instance represents.
@@ -48,15 +54,6 @@ namespace FluentDot.Entities.Graphs
         public override GraphType Type
         {
             get { return subGraphType; }
-        }
-
-        /// <summary>
-        /// Gets the graph indicator.
-        /// </summary>
-        /// <value>The graph indicator.</value>
-        protected override string GraphIndicator
-        {
-            get { return "subgraph"; }
         }
 
         #endregion
@@ -69,6 +66,16 @@ namespace FluentDot.Entities.Graphs
         /// <value>The parent graph.</value>
         public IGraph Parent {
             get { return parentGraph; }
+        }
+
+        /// <summary>
+        /// Gets or sets the rank.
+        /// </summary>
+        /// <value>The rank.</value>
+        public RankType Rank
+        {
+            get { return GetAttributeValue<RankAttribute, RankType>(); }
+            set { SetAttribute(value, () => new RankAttribute(value)); }
         }
 
         #endregion

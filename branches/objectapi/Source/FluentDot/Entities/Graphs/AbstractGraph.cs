@@ -6,58 +6,33 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
-using System;
 using System.Drawing;
-using FluentDot.Attributes;
 using FluentDot.Attributes.Graphs;
 using FluentDot.Attributes.Shared;
 using FluentDot.Builders.Graphs;
+using FluentDot.Conventions;
 
 namespace FluentDot.Entities.Graphs {
 
     /// <summary>
     /// An abstract base class for graphs.
     /// </summary>
-    public abstract class AbstractGraph : IGraph {
-
-        #region Globals
-
-        private readonly IGraphBuilder graphBuilder;
-
-        #endregion
-
+    public abstract class AbstractGraph : AbstractGraphContainer, IGraph {
+    
         #region Construction
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractGraph"/> class.
         /// </summary>
         /// <param name="graphBuilder">The graph builder.</param>
-        internal AbstractGraph(IGraphBuilder graphBuilder)
+        internal AbstractGraph(IGraphBuilder graphBuilder) : base(graphBuilder)
         {
-            this.graphBuilder = graphBuilder;
+            
         }
 
         #endregion
 
         #region IGraph Members
-
-        /// <summary>
-        /// Gets or sets the name of the graph.
-        /// </summary>
-        /// <value>The name.</value>
-        public string Name
-        {
-            get { return graphBuilder.Name; }
-            set { graphBuilder.Name = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the type of graph this instance represents.
-        /// </summary>
-        /// <value>The type of graph.</value>
-        public abstract GraphType Type {
-            get;
-        }
 
         /// <summary>
         /// Sets the url property on the graph.
@@ -160,16 +135,7 @@ namespace FluentDot.Entities.Graphs {
             get { return GetAttributeValue<LabelLocationAttribute, Location>(); }
             set { SetAttribute(value, () => new LabelLocationAttribute(value)); }
         }
-
-        /// <summary>
-        /// Adds the custom attribute to the graph.
-        /// </summary>
-        /// <param name="attribute">The attribute to add.</param>
-        public void AddCustomAttribute(IDotAttribute attribute)
-        {
-            graphBuilder.Attributes.AddAttribute(attribute);
-        }
-
+        
         /// <summary>
         /// Gets or sets the margin for the graph.
         /// </summary>
@@ -333,63 +299,36 @@ namespace FluentDot.Entities.Graphs {
             set { SetAttribute(value, () => new RankSeperationAttribute(value)); }
         }
 
-        #endregion
-
-        #region IDotElement Members
-
         /// <summary>
-        /// Creates a textual Dot representation of this element.
+        /// Adds the specified convention to the graph.
         /// </summary>
-        /// <returns>
-        /// A textual Dot representation of this element.
-        /// </returns>
-        public string ToDot() {
-            return graphBuilder.ToDot();
-        }
-
-        #endregion
-
-        #region Private Members
-        
-        /// <summary>
-        /// Sets the attribute on the builder.
-        /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
-        /// <param name="value">The attribute to set.</param>
-        /// <param name="attribute">The attribute.</param>
-        private void SetAttribute<TValue, TAttribute>(TValue value, Func<TAttribute> attribute) where TAttribute : IDotAttribute
+        /// <typeparam name="T">The type of entity the convention applies to.</typeparam>
+        /// <param name="convention">The convention.</param>
+        public void AddConvention<T>(IConvention<T> convention)
         {
-            SetAttribute(value, null, attribute);
+            GraphBuilder.Conventions.AddConvention(convention);
         }
 
         /// <summary>
-        /// Sets the attribute on the builder.
+        /// Creates and adds a sub graph to the graph.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
-        /// <param name="value">The attribute to set.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <param name="attribute">The attribute.</param>
-        private void SetAttribute<TValue, TAttribute>(TValue value, object defaultValue, Func<TAttribute> attribute) where TAttribute : IDotAttribute {
-            if (Equals(value, defaultValue)) 
-            {
-                graphBuilder.Attributes.Remove<TAttribute>();
-            } 
-            else 
-            {
-                graphBuilder.Attributes.AddAttribute(attribute());
-            }
-        }
-        
-        private V GetAttributeValue<T, V>() where T: class, IDotAttribute
+        /// <returns>The created subgraph.</returns>
+        public ISubGraph AddSubGraph()
         {
-            return GetAttributeValue<T, V>(default(V));
+            var graph = new SubGraph(this);
+            GraphBuilder.SubGraphLookup.AddSubGraph(graph);
+            return graph;
         }
 
-        private V GetAttributeValue<T, V>(V defaultValue) where T : class, IDotAttribute {
-            var attribute = graphBuilder.Attributes.GetAttribute<T>();
-            return attribute != null ? (V)attribute.Value : defaultValue;
+        /// <summary>
+        /// Creates and adds a cluster to the graph.
+        /// </summary>
+        /// <returns>The created cluster.</returns>
+        public ICluster AddCluster()
+        {
+            var graph = new Cluster(this);
+            GraphBuilder.SubGraphLookup.AddSubGraph(graph);
+            return graph;
         }
 
         #endregion

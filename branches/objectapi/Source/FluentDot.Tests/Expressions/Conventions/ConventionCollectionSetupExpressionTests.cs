@@ -6,9 +6,13 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
+using FluentDot.Conventions;
+using FluentDot.Entities.Edges;
+using FluentDot.Entities.Graphs;
+using FluentDot.Entities.Nodes;
 using FluentDot.Expressions.Conventions;
 using NUnit.Framework;
-using FluentDot.Conventions;
+using Rhino.Mocks;
 
 namespace FluentDot.Tests.Expressions.Conventions
 {
@@ -16,72 +20,38 @@ namespace FluentDot.Tests.Expressions.Conventions
     public class ConventionCollectionSetupExpressionTests
     {
         #region Tests
-
+        
         [Test]
-        public void AddType_Should_Create_Instance_And_Add_It_To_The_Tracker()
-        {
-            var tracker = new ConventionTracker();
-            var expression = new ConventionCollectionSetupExpression(tracker);
+        public void Add_Should_Create_Instance_And_Add_It_To_The_Tracker() {
+            var graph = MockRepository.GenerateMock<IGraph>();
+            var expression = new ConventionCollectionSetupExpression(graph);
 
-            Assert.AreEqual(tracker.NodeConventions.Count, 0);
-            Assert.AreEqual(expression.AddType<TestNodeConvention>(), expression);
-            Assert.AreEqual(tracker.NodeConventions.Count, 1);
+            var convention1 = new TestNodeConvention();
+            var convention2 = new TestEdgeConvention();
 
-            Assert.AreEqual(tracker.EdgeConventions.Count, 0);
-            Assert.AreEqual(expression.AddType<TestEdgeConvention>(), expression);
-            Assert.AreEqual(tracker.EdgeConventions.Count, 1);
-        }
+            graph.Expect(x => x.AddConvention(convention1)).Repeat.Once();
+            graph.Expect(x => x.AddConvention(convention2)).Repeat.Once();
 
-        [Test]
-        [ExpectedException(typeof(System.ArgumentException))]
-        public void AddType_Should_Throw_For_Conventions_Other_Than_Edge_And_Node()
-        {
-            var tracker = new ConventionTracker();
-            var expression = new ConventionCollectionSetupExpression(tracker);
-            expression.AddType<DummyConvention>();
-        }
-
-        [Test]
-        public void AddInstance_Should_Create_Instance_And_Add_It_To_The_Tracker() {
-            var tracker = new ConventionTracker();
-            var expression = new ConventionCollectionSetupExpression(tracker);
-
-            Assert.AreEqual(tracker.NodeConventions.Count, 0);
-            Assert.AreEqual(expression.AddInstance(new TestNodeConvention()), expression);
-            Assert.AreEqual(tracker.NodeConventions.Count, 1);
-
-            Assert.AreEqual(tracker.EdgeConventions.Count, 0);
-            Assert.AreEqual(expression.AddInstance(new TestEdgeConvention()), expression);
-            Assert.AreEqual(tracker.EdgeConventions.Count, 1);
-        }
-
-        [Test]
-        [ExpectedException(typeof(System.ArgumentException))]
-        public void AddInstance_Should_Throw_For_Conventions_Other_Than_Edge_And_Node() {
-            var tracker = new ConventionTracker();
-            var expression = new ConventionCollectionSetupExpression(tracker);
-            expression.AddInstance(new DummyConvention());
+            expression.Add(convention1);
+            expression.Add(convention2);
+            
+            graph.VerifyAllExpectations();
         }
 
         #endregion
 
         #region Private Members
-
-        private class DummyConvention : IConvention
-        {
-            
-        }
-
+        
         private class TestNodeConvention : INodeConvention
         {
             #region INodeConvention Members
 
-            public bool ShouldApply(INodeInfo nodeInfo)
+            public bool ShouldApply(IGraphNode nodeInfo)
             {
                 throw new System.NotImplementedException();
             }
 
-            public void Apply(INodeInfo nodeInfo, FluentDot.Expressions.Nodes.INodeExpression nodeConfig)
+            public void Apply(IGraphNode nodeInfo)
             {
                 throw new System.NotImplementedException();
             }
@@ -93,12 +63,12 @@ namespace FluentDot.Tests.Expressions.Conventions
         {
             #region IEdgeConvention Members
 
-            public bool ShouldApply(IEdgeInfo nodeInfo)
+            public bool ShouldApply(IEdge nodeInfo)
             {
                 throw new System.NotImplementedException();
             }
 
-            public void Apply(IEdgeInfo edgeInfo, FluentDot.Expressions.Edges.IEdgeExpression edge)
+            public void Apply(IEdge edgeInfo)
             {
                 throw new System.NotImplementedException();
             }
