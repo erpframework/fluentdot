@@ -211,14 +211,10 @@
     <Compile Include="Common\ITypedEnum.cs" />
     <Compile Include="Common\StringEnum.cs" />
     <Compile Include="Conventions\ConventionTracker.cs" />
-    <Compile Include="Conventions\EdgeInfo.cs" />
     <Compile Include="Conventions\IConvention.cs" />
     <Compile Include="Conventions\IConventionTracker.cs" />
     <Compile Include="Conventions\IEdgeConvention.cs" />
-    <Compile Include="Conventions\IEdgeInfo.cs" />
     <Compile Include="Conventions\INodeConvention.cs" />
-    <Compile Include="Conventions\INodeInfo.cs" />
-    <Compile Include="Conventions\NodeInfo.cs" />
     <Compile Include="Entities\Edges\EdgeDefaults.cs" />
     <Compile Include="Entities\EntityDefaultsBase.cs" />
     <Compile Include="Builders\Graphs\GraphBuilder.cs" />

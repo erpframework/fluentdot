@@ -15,13 +15,6 @@ namespace FluentDot.Attributes.Shared
     /// </summary>
     public class PointValue : IDotElement {
 
-        #region Globals
-
-        private readonly float x;
-        private readonly float y;
-
-        #endregion
-
         #region Construction
 
         /// <summary>
@@ -31,9 +24,25 @@ namespace FluentDot.Attributes.Shared
         /// <param name="y">The y.</param>
         public PointValue(float x, float y)
         {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
+
+        #endregion
+
+        #region Public Members
+
+        /// <summary>
+        /// Gets or sets the X value.
+        /// </summary>
+        /// <value>The X value.</value>
+        public float X { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the Y value.
+        /// </summary>
+        /// <value>The Y value.</value>
+        public float Y { get; private set; }
 
         #endregion
 
@@ -46,7 +55,7 @@ namespace FluentDot.Attributes.Shared
         /// A textual Dot representation of this element.
         /// </returns>
         public string ToDot() {
-            return string.Format("{0},{1}", x.ToString("F"), y.ToString("F"));
+            return string.Format("{0},{1}", X.ToString("F"), Y.ToString("F"));
         }
 
         #endregion
@@ -70,7 +79,7 @@ namespace FluentDot.Attributes.Shared
                 return false;
             }
 
-            return other.x == x && other.y == y;
+            return other.X == X && other.Y == Y;
         }
 
         /// <summary>
@@ -83,7 +92,7 @@ namespace FluentDot.Attributes.Shared
         {
             unchecked
             {
-                return (x.GetHashCode()*397) ^ y.GetHashCode();
+                return (X.GetHashCode()*397) ^ Y.GetHashCode();
             }
         }
 

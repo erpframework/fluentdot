@@ -144,7 +144,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithFontColor(Color fontColor)
         {
-            graph.Attributes.AddAttribute(new FontColorAttribute(fontColor));
+            graph.FontColor = fontColor;
             return this;
         }
 
@@ -155,7 +155,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithLabel(string label)
         {
-            graph.Attributes.AddAttribute(new LabelAttribute(label));
+            graph.Label = label;
             return this;
         }
 
@@ -166,7 +166,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithLabelJustification(Justification justification)
         {
-            graph.Attributes.AddAttribute(new LabelJustificationAttribute(justification));
+            graph.LabelJustification = justification;
             return this;
         }
 
@@ -177,7 +177,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithLabelLocation(Location location)
         {
-            graph.Attributes.AddAttribute(new LabelLocationAttribute(location));
+            graph.LabelLocation = location;
             return this;
         }
 
@@ -204,7 +204,7 @@ namespace FluentDot.Expressions.Graphs
         /// <param name="attribute">The attribute to apply to the graph.</param>
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithCustomAttribute(IDotAttribute attribute) {
-            graph.Attributes.AddAttribute(attribute);
+            graph.AddCustomAttribute(attribute);
             return this;
         }
 
@@ -216,7 +216,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithMargin(float x, float y)
         {
-            graph.Attributes.AddAttribute(new MarginAttribute(x, y));
+            graph.Margin = new PointValue(x, y);
             return this;
         }
 
@@ -227,7 +227,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithEdgeOrdering(Ordering ordering)
         {
-            graph.Attributes.AddAttribute(new OrderingAttribute(ordering));
+            graph.EdgeOrdering = ordering;
             return this;
         }
 
@@ -237,7 +237,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression RenderLandscape()
         {
-            graph.Attributes.AddAttribute(new RotateAttribute(90));
+            graph.Rotation = 90;
             return this;
         }
 
@@ -248,7 +248,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithMinimumNodeSeperation(double inches)
         {
-            graph.Attributes.AddAttribute(new NodeSeperationAttribute(inches));
+            graph.MinimumNodeSeperation = inches;
             return this;
         }
 
@@ -258,7 +258,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression DoNotJustify()
         {
-            graph.Attributes.AddAttribute(new NoJustifyAttribute(true));
+            graph.NoJustify = true;
             return this;
         }
 
@@ -269,7 +269,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithOutputOrder(OutputMode outputMode)
         {
-            graph.Attributes.AddAttribute(new OutputOrderAttribute(outputMode));
+            graph.OutputOrder = outputMode;
             return this;
         }
 
@@ -281,7 +281,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithPadding(float x, float y)
         {
-            graph.Attributes.AddAttribute(new PadAttribute(x, y));
+            graph.Padding = new PointValue(x, y);
             return this;
         }
 
@@ -295,7 +295,7 @@ namespace FluentDot.Expressions.Graphs
         /// <remarks>Only applicable for PostScript.</remarks>
         public IGraphExpression WithPageSize(float pageWidth, float pageHeight)
         {
-            graph.Attributes.AddAttribute(new PageAttribute(pageWidth, pageHeight));
+            graph.PageSize = new PointValue(pageWidth, pageHeight);
             return this;
         }
 
@@ -306,7 +306,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithPageDirection(PageDirection pageDirection)
         {
-            graph.Attributes.AddAttribute(new PageDirectionAttribute(pageDirection));
+            graph.PageDirection = pageDirection;
             return this;
         }
 
@@ -317,7 +317,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithRatio(Ratio ratio)
         {
-            graph.Attributes.AddAttribute(new RatioAttribute(new RatioType(ratio)));
+            graph.Ratio = new RatioType(ratio);
             return this;
         }
 
@@ -328,7 +328,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithRatio(double value)
         {
-            graph.Attributes.AddAttribute(new RatioAttribute(new RatioType(value)));
+            graph.Ratio = new RatioType(value);
             return this;
         }
 
@@ -339,7 +339,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithComment(string comment)
         {
-            graph.Attributes.AddAttribute(new CommentAttribute(comment));
+            graph.Comment = comment;
             return this;
         }
 
@@ -350,7 +350,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithAspect(double aspect)
         {
-            graph.Attributes.AddAttribute(new AspectAttribute(new AspectValue(aspect)));
+            graph.Aspect = new AspectValue(aspect);
             return this;
         }
 
@@ -362,7 +362,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithAspect(double aspect, int maximumPasses)
         {
-            graph.Attributes.AddAttribute(new AspectAttribute(new AspectValue(aspect, maximumPasses)));
+            graph.Aspect = new AspectValue(aspect, maximumPasses);
             return this;
         }
 
@@ -373,7 +373,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithRankDirection(RankDirection rankDirection)
         {
-            graph.Attributes.AddAttribute(new RankDirectionAttribute(rankDirection));
+            graph.RankDirection = rankDirection;
             return this;
         }
 
@@ -384,17 +384,17 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithClusterRankMode(ClusterMode clusterMode)
         {
-            graph.Attributes.AddAttribute(new ClusterRankAttribute(clusterMode));
+            graph.ClusterRankMode = clusterMode;
             return this;
         }
 
         /// <summary>
         /// Compounds this instance.
-        /// </summary>
+        /// </summary>  
         /// <returns>The current expression instance.</returns>
         public IGraphExpression Compound()
         {
-            graph.Attributes.AddAttribute(new CompoundAttribute(true));
+            graph.Compound = true;
             return this;
         }
 
@@ -404,7 +404,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithEqualRankSeperation()
         {
-            graph.Attributes.AddAttribute(new RankSeperationAttribute(new RankSeperation(null, true)));
+            graph.RankSeperation = new RankSeperation(null, true);
             return this;
         }
 
@@ -416,7 +416,7 @@ namespace FluentDot.Expressions.Graphs
         /// <returns>The current expression instance.</returns>
         public IGraphExpression WithRankSeperation(double inches, bool equally)
         {
-            graph.Attributes.AddAttribute(new RankSeperationAttribute(new RankSeperation(inches, equally)));
+            graph.RankSeperation = new RankSeperation(inches, equally);
             return this;
         }
 

@@ -11,7 +11,19 @@ namespace FluentDot.Conventions
     /// <summary>
     /// A marker interface for conventions.
     /// </summary>
-    public interface IConvention
+    public interface IConvention<T>
     {
+        /// <summary>
+        /// Determines whether the configuration in the Apply method should be applied to this entity instance.
+        /// </summary>
+        /// <param name="entity">The entity currently being inspected.</param>
+        /// <returns>An indication of whether we should proceed with configuring this entity instance.</returns>
+        bool ShouldApply(T entity);
+
+        /// <summary>
+        /// Applies the specified configuration to the entity in question.
+        /// </summary>
+        /// <param name="entity">The entity to which the configuration should be applied to.</param>
+        void Apply(T entity);
     }
 }

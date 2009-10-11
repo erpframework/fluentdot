@@ -20,9 +20,19 @@ namespace FluentDot.Attributes.Graphs
         /// <summary>
         /// Initializes a new instance of the <see cref="PadAttribute"/> class.
         /// </summary>
+        /// <param name="value">The value.</param>
+        public PadAttribute(PointValue value)
+            : base("pad", value, false)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PadAttribute"/> class.
+        /// </summary>
         /// <param name="x">The x padding value.</param>
         /// <param name="y">The y padding value.</param>
-        public PadAttribute(float x, float y) : base("pad", new PointValue(x, y), false)
+        public PadAttribute(float x, float y) : this(new PointValue(x, y))
         {
             
         }

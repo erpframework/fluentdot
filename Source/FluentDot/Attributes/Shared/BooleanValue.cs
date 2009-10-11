@@ -50,6 +50,24 @@ namespace FluentDot.Attributes.Shared
         /// <value><c>true</c> if value; otherwise, <c>false</c>.</value>
         public bool Value { get; private set; }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="FluentDot.Attributes.Shared.BooleanValue"/> to <see cref="System.Boolean"/>.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator bool(BooleanValue instance) {
+            return instance.Value;
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.Boolean"/> to <see cref="FluentDot.Attributes.Shared.BooleanValue"/>.
+        /// </summary>
+        /// <param name="instance">if set to <c>true</c> [instance].</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator BooleanValue(bool instance) {
+            return new BooleanValue(instance);
+        }
+
         #endregion
 
         #region Object Members
