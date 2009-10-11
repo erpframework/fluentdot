@@ -7,10 +7,13 @@
 */
 
 using System;
+using System.Drawing;
+using System.Linq.Expressions;
 using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Edges;
 using FluentDot.Entities.Graphs;
 using FluentDot.Entities.Nodes;
+using FluentDot.Tests.Util;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -19,48 +22,71 @@ namespace FluentDot.Tests.Entities.Graphs
     [TestFixture]
     public class ClusterTests {
 
+        #region Tests
+
         [Test]
         public void Constructor_Saves_Graph_Type()
         {
-            var graph = MockRepository.GenerateMock<IGraphBuilder>();
             var edgeTracker = MockRepository.GenerateMock<IEdgeTracker>();
             var nodeTracker = MockRepository.GenerateMock<INodeTracker>();
 
-            graph.Expect(x => x.EdgeLookup).Return(edgeTracker).Repeat.AtLeastOnce();
-            graph.Expect(x => x.NodeLookup).Return(nodeTracker).Repeat.AtLeastOnce();
-            graph.Expect(x => x.Type).Return(GraphType.Directed);
-
-            Assert.AreEqual(new Cluster(graph).Type, GraphType.Directed);
+            var cluster = new TestCluster();
+            cluster.Builder.Expect(x => x.EdgeLookup).Return(edgeTracker).Repeat.AtLeastOnce();
+            cluster.Builder.Expect(x => x.NodeLookup).Return(nodeTracker).Repeat.AtLeastOnce();
+            Assert.AreEqual(cluster.Type, GraphType.Directed);
         }
        
 
         [Test]
         public void Name_Should_Prepend_Cluster_To_Given_Name()
         {
-            var graph = MockRepository.GenerateMock<IGraphBuilder>();
-            var edgeTracker = MockRepository.GenerateMock<IEdgeTracker>();
-            var nodeTracker = MockRepository.GenerateMock<INodeTracker>();
-
-            graph.Expect(x => x.EdgeLookup).Return(edgeTracker).Repeat.AtLeastOnce();
-            graph.Expect(x => x.NodeLookup).Return(nodeTracker).Repeat.AtLeastOnce();
-            graph.Expect(x => x.Type).Return(GraphType.Directed);
-
-            Assert.IsTrue(new Cluster(graph).Name.StartsWith("cluster"));
+            Assert.IsTrue(new TestCluster().Name.StartsWith("cluster"));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Name_Should_Throw_For_Null()
         {
-            var graph = MockRepository.GenerateMock<IGraphBuilder>();
-            var edgeTracker = MockRepository.GenerateMock<IEdgeTracker>();
-            var nodeTracker = MockRepository.GenerateMock<INodeTracker>();
-
-            graph.Expect(x => x.EdgeLookup).Return(edgeTracker).Repeat.AtLeastOnce();
-            graph.Expect(x => x.NodeLookup).Return(nodeTracker).Repeat.AtLeastOnce();
-            graph.Expect(x => x.Type).Return(GraphType.Directed);
-
-            new Cluster(graph).Name = null;
+            new TestCluster().Name = null;
         }
+
+        [Test]
+        public void BackgroundColor_CanGetAndSet()
+        {
+            AssertPropertyValid(x => x.BackgroundColor, Color.Aqua);
+            AssertPropertyValid(x => x.BackgroundColor, null);
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private static void AssertPropertyValid<T>(Expression<Func<ICluster, T>> propertyExpression, T testValue) {
+            AssertPropertyValid(propertyExpression, null, testValue);
+        }
+
+        private static void AssertPropertyValid<T>(Expression<Func<ICluster, T>> propertyExpression, object defaultValue, T testValue) {
+            var testGraph = new TestCluster(new GraphBuilder("aa"));
+            PropertyTester.AssertPropertyValid(testGraph, propertyExpression, defaultValue, testValue);
+        }
+
+        private class TestCluster : Cluster {
+
+            public TestCluster() : this(MockRepository.GenerateMock<IGraphBuilder>())
+            {
+
+            }
+
+            public TestCluster(IGraphBuilder builder)
+                : base(new DirectedGraph(builder)) {
+                
+            }
+            
+            public override GraphType Type {
+                get { return GraphType.Directed; }
+            }
+        }
+
+        #endregion
     }
 }

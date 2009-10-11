@@ -6,7 +6,7 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
-using FluentDot.Conventions;
+using FluentDot.Entities.Graphs;
 
 namespace FluentDot.Expressions.Conventions
 {
@@ -19,7 +19,7 @@ namespace FluentDot.Expressions.Conventions
         #region Globals
 
         private readonly T parent;
-        private readonly IConventionTracker conventionTracker;
+        private readonly IGraph graph;
 
         #endregion
 
@@ -29,11 +29,11 @@ namespace FluentDot.Expressions.Conventions
         /// Initializes a new instance of the <see cref="ConventionCollectionModifiersExpression&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="parent">The parent.</param>
-        /// <param name="conventionTracker">The convention tracker.</param>
-        public ConventionCollectionModifiersExpression(T parent, IConventionTracker conventionTracker)
+        /// <param name="graph">The graph.</param>
+        public ConventionCollectionModifiersExpression(T parent, IGraph graph)
         {
             this.parent = parent;
-            this.conventionTracker = conventionTracker;
+            this.graph = graph;
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace FluentDot.Expressions.Conventions
         {
             if (setupExpression != null)
             {
-                setupExpression(new ConventionCollectionSetupExpression(conventionTracker));
+                setupExpression(new ConventionCollectionSetupExpression(graph));
             }
 
             return parent;

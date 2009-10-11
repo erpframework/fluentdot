@@ -7,6 +7,8 @@
 */
 
 using System;
+using System.Drawing;
+using FluentDot.Attributes.Graphs;
 
 namespace FluentDot.Entities.Graphs
 {
@@ -21,7 +23,7 @@ namespace FluentDot.Entities.Graphs
         /// Initializes a new instance of the <see cref="Cluster"/> class.
         /// </summary>
         /// <param name="parentGraph">The parent graph.</param>
-        public Cluster(IGraph parentGraph)
+        public Cluster(AbstractGraph parentGraph)
             : base(parentGraph)
         {
             
@@ -54,12 +56,17 @@ namespace FluentDot.Entities.Graphs
             }
         }
 
+        #endregion
+
+        #region ICluster Members
+
         /// <summary>
-        /// Gets the graph indicator.
+        /// Gets or sets the color of the background.
         /// </summary>
-        /// <value>The graph indicator.</value>
-        protected override string GraphIndicator {
-            get { return "subgraph"; }
+        /// <value>The color of the background.</value>
+        public Color? BackgroundColor {
+            get { return GetAttributeValue<BackgroundColorAttribute, Color?>(); }
+            set { SetAttribute(value, () => new BackgroundColorAttribute(value.Value)); }
         }
 
         #endregion

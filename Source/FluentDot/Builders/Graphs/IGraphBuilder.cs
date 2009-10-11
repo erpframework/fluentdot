@@ -19,7 +19,7 @@ namespace FluentDot.Builders.Graphs
     /// <summary>
     /// A DOT graph.
     /// </summary>
-    internal interface IGraphBuilder : IDotElement, IAttributeBasedEntity {
+    public interface IGraphBuilder : IDotElement, IAttributeBasedEntity {
         
         /// <summary>
         /// Gets or sets the name of the graph.
@@ -104,5 +104,11 @@ namespace FluentDot.Builders.Graphs
         /// </summary>
         /// <param name="template">The template.</param>
         void SetEdgeDefaults(IEdge template);
+
+        /// <summary>
+        /// Gets the graph indicator.
+        /// </summary>
+        /// <value>The graph indicator.</value>
+        string GraphIndicator { get; }
     }
 }

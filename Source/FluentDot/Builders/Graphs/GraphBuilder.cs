@@ -33,7 +33,6 @@ namespace FluentDot.Builders.Graphs
 
         private readonly List<IGraphNode> nodes = new List<IGraphNode>();
         private readonly List<IEdge> edges = new List<IEdge>();
-        private readonly string graphIndicator;
         
         #endregion
 
@@ -67,12 +66,12 @@ namespace FluentDot.Builders.Graphs
             this.nodeTracker = nodeTracker;
             this.edgeTracker = edgeTracker;
             this.subGraphTracker = subGraphTracker;
-            this.graphIndicator = graphIndicator;
+            GraphIndicator = graphIndicator;
         }
 
         #endregion
 
-        #region IGraph Members
+        #region IGraphBuilder Members
 
         /// <summary>
         /// Gets or sets the name of the graph.
@@ -205,6 +204,15 @@ namespace FluentDot.Builders.Graphs
             edgeDefaults = new EdgeDefaults(template);
         }
 
+        /// <summary>
+        /// Gets the graph indicator.
+        /// </summary>
+        /// <value>The graph indicator.</value>
+        public string GraphIndicator {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region IDotElement Members
@@ -219,7 +227,7 @@ namespace FluentDot.Builders.Graphs
         {
             var sb = new StringBuilder();
 
-            sb.Append(graphIndicator).Append(" \"").Append(Name).Append("\"");
+            sb.Append(GraphIndicator).Append(" \"").Append(Name).Append("\"");
 
             sb.AppendLine(" {");
 

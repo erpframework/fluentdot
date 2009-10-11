@@ -47,7 +47,6 @@ namespace FluentDot.Expressions.Graphs
         {
             var expression = new ClusterExpression(graph);
             expression.Cluster.Name = name;
-            graph.AddSubGraph(expression.Cluster);
             return expression;
         }
 

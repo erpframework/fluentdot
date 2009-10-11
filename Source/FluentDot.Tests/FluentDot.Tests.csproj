@@ -163,6 +163,7 @@
     <Compile Include="Attributes\Shared\LabelAttributeTests.cs" />
     <Compile Include="Attributes\Edges\ArrowDirectionTests.cs" />
     <Compile Include="Attributes\Edges\ArrowShapeTests.cs" />
+    <Compile Include="Entities\Graphs\AbstractGraphContainerTests.cs" />
     <Compile Include="Entities\Graphs\AbstractGraphTests.cs" />
     <Compile Include="Entities\Graphs\ClusterTests.cs" />
     <Compile Include="Builders\Graphs\SubGraphTrackerTests.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Expressions\Shared\MultiActionExpressionTests.cs" />
     <Compile Include="FluentlyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\PropertyTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentDot\FluentDot.csproj">

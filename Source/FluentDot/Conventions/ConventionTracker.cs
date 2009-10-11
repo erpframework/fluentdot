@@ -21,8 +21,8 @@ namespace FluentDot.Conventions
     {
         #region Globals
 
-        private readonly List<IEdgeConvention> edgeConventions = new List<IEdgeConvention>();
-        private readonly List<INodeConvention> nodeConventions = new List<INodeConvention>();
+        private readonly List<IConvention<IEdge>> edgeConventions = new List<IConvention<IEdge>>();
+        private readonly List<IConvention<IGraphNode>> nodeConventions = new List<IConvention<IGraphNode>>();
 
         #endregion
 
@@ -31,29 +31,23 @@ namespace FluentDot.Conventions
         /// <summary>
         /// Adds the specified convention to the tracker.
         /// </summary>
-        /// <param name="convention">The convention to add to this instance.</param>
-        public void AddConvention(IEdgeConvention convention)
+        /// <typeparam name="T">The type of entity the convention is applied to.</typeparam>
+        /// <param name="convention">The convention to add.</param>
+        public void AddConvention<T>(IConvention<T> convention)
         {
-            if (convention == null)
-            {
-                throw new ArgumentNullException("convention");
-            }
-            
-            edgeConventions.Add(convention);
-        }
-
-        /// <summary>
-        /// Adds the specified convention to the tracker.
-        /// </summary>
-        /// <param name="convention">The convention to add to this instance.</param>
-        public void AddConvention(INodeConvention convention)
-        {
-            if (convention == null)
-            {
+            if (convention == null) {
                 throw new ArgumentNullException("convention");
             }
 
-            nodeConventions.Add(convention);
+            var entityType = typeof(T);
+
+            if (typeof(IConvention<IEdge>).IsAssignableFrom(entityType))
+            {
+                edgeConventions.Add(entityType as IConvention<IEdge>);
+            } 
+            else if (typeof(IConvention<IGraphNode>).IsAssignableFrom(entityType)) {
+                edgeConventions.Add(entityType as IConvention<IEdge>);
+            }
         }
 
         /// <summary>
@@ -98,13 +92,13 @@ namespace FluentDot.Conventions
         /// Gets the edge conventions.
         /// </summary>
         /// <value>The edge conventions.</value>
-        public IList<IEdgeConvention> EdgeConventions { get { return new ReadOnlyCollection<IEdgeConvention>(edgeConventions); } }
+        public IList<IConvention<IEdge>> EdgeConventions { get { return new ReadOnlyCollection<IConvention<IEdge>>(edgeConventions); } }
 
         /// <summary>
         /// Gets the node conventions.
         /// </summary>
         /// <value>The node conventions.</value>
-        public IList<INodeConvention> NodeConventions { get { return new ReadOnlyCollection<INodeConvention>(nodeConventions); } }
+        public IList<IConvention<IGraphNode>> NodeConventions { get { return new ReadOnlyCollection<IConvention<IGraphNode>>(nodeConventions); } }
 
         #endregion
     }

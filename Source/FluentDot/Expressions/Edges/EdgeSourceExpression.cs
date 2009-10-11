@@ -7,7 +7,6 @@
 */
 
 using System;
-using FluentDot.Builders.Graphs;
 using FluentDot.Entities.Graphs;
 using FluentDot.Entities.Nodes;
 using FluentDot.Expressions.Nodes;
@@ -21,7 +20,7 @@ namespace FluentDot.Expressions.Edges
         
         #region Globals
 
-        private readonly IGraph graph;
+        private readonly IGraphContainer graphContainer;
 
         #endregion
 
@@ -30,10 +29,10 @@ namespace FluentDot.Expressions.Edges
         /// <summary>
         /// Initializes a new instance of the <see cref="EdgeSourceExpression"/> class.
         /// </summary>
-        /// <param name="graph">The graph.</param>
-        public EdgeSourceExpression(IGraph graph)
+        /// <param name="graphContainer">The graph container to work on.</param>
+        public EdgeSourceExpression(IGraphContainer graphContainer)
         {
-            this.graph = graph;
+            this.graphContainer = graphContainer;
         }
 
         #endregion
@@ -48,15 +47,15 @@ namespace FluentDot.Expressions.Edges
         /// An expression to choose the destination of the edge.
         /// </returns>
         public IEdgeDestinationSelectionExpression FromNodeWithName(string name) {
-            var fromNode = graph.NodeLookup.GetNodeByName(name);
+            var fromNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByName(name);
 
             if (fromNode == null)
             {
                 fromNode = new GraphNode(name);
-                graph.AddNode(fromNode);
+                graphContainer.AddNode(fromNode);
             }
 
-            return new EdgeDestinationSelectionExpression(new NodeTarget(fromNode), graph);
+            return new EdgeDestinationSelectionExpression(new NodeTarget(fromNode), graphContainer);
         }
 
         /// <summary>
@@ -68,13 +67,13 @@ namespace FluentDot.Expressions.Edges
         /// An expression to choose the destination of the edge.
         /// </returns>
         public IEdgeDestinationSelectionExpression FromNodeWithTag<T>(T tag) {
-            var fromNode = graph.NodeLookup.GetNodeByTag(tag);
+            var fromNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByTag(tag);
 
             if (fromNode == null) {
                 throw new ArgumentException("Could not find node with the specified tag.", "tag");
             }
 
-            return new EdgeDestinationSelectionExpression(new NodeTarget(fromNode), graph);
+            return new EdgeDestinationSelectionExpression(new NodeTarget(fromNode), graphContainer);
         }
 
         /// <summary>
@@ -87,7 +86,7 @@ namespace FluentDot.Expressions.Edges
         /// </returns>
         public IEdgeDestinationSelectionExpression FromRecordWithName(string name, string elementName)
         {
-            var fromNode = graph.NodeLookup.GetNodeByName(name);
+            var fromNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByName(name);
 
             if (fromNode == null) {
                 throw new ArgumentException("Could not find node with name " + name, "name");
@@ -105,7 +104,7 @@ namespace FluentDot.Expressions.Edges
                 throw new ArgumentException("Invalid element name - the specified name could not be found.", "elementName");
             }
 
-            return new EdgeDestinationSelectionExpression(new NodeTarget(recordNode, elementName), graph);
+            return new EdgeDestinationSelectionExpression(new NodeTarget(recordNode, elementName), graphContainer);
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace FluentDot.Expressions.Edges
         /// </returns>
         public IEdgeDestinationSelectionExpression FromRecordWithTag<T>(T tag, string elementName) {
 
-            var fromNode = graph.NodeLookup.GetNodeByTag(tag);
+            var fromNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByTag(tag);
 
             if (fromNode == null) {
                 throw new ArgumentException("Could not find node with tag " + tag, "tag");
@@ -135,7 +134,7 @@ namespace FluentDot.Expressions.Edges
                 throw new ArgumentException("Invalid element name - the specified name could not be found.", "elementName");
             }
 
-            return new EdgeDestinationSelectionExpression(new NodeTarget(recordNode, elementName), graph);
+            return new EdgeDestinationSelectionExpression(new NodeTarget(recordNode, elementName), graphContainer);
         }
 
         /// <summary>
@@ -157,14 +156,14 @@ namespace FluentDot.Expressions.Edges
         public IEdgeDestinationSelectionExpression FromNewNode(string nodeName, Action<INodeExpression> nodeConfiguration)
         {
             var fromNode = new GraphNode(nodeName);
-            graph.AddNode(fromNode);
+            graphContainer.AddNode(fromNode);
 
             if (nodeConfiguration != null) {
                 var expression = new NodeExpression(fromNode);
                 nodeConfiguration(expression);
             }
 
-            return new EdgeDestinationSelectionExpression(new NodeTarget(fromNode), graph);
+            return new EdgeDestinationSelectionExpression(new NodeTarget(fromNode), graphContainer);
         }
 
         #endregion

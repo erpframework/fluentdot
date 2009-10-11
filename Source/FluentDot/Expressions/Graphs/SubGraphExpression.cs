@@ -21,7 +21,7 @@ namespace FluentDot.Expressions.Graphs {
 
         #region Globals
 
-        private readonly SubGraph subGraph;
+        private readonly ISubGraph subGraph;
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace FluentDot.Expressions.Graphs {
         /// </summary>
         /// <param name="graph">The graph.</param>
         public SubGraphExpression(IGraph graph) {
-            subGraph = new SubGraph(graph);
+            subGraph = graph.AddSubGraph();
         }
 
         #endregion
@@ -43,7 +43,7 @@ namespace FluentDot.Expressions.Graphs {
         /// Gets the cluster.
         /// </summary>
         /// <value>The cluster.</value>
-        public SubGraph SubGraph {
+        public ISubGraph SubGraph {
             get { return subGraph; }
         }
 

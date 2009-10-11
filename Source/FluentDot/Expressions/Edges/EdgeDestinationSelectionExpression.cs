@@ -21,7 +21,7 @@ namespace FluentDot.Expressions.Edges
         
         #region Globals
 
-        private readonly IGraph graph;
+        private readonly IGraphContainer graphContainer;
         private readonly INodeTarget fromNode;
 
         #endregion
@@ -32,11 +32,11 @@ namespace FluentDot.Expressions.Edges
         /// Initializes a new instance of the <see cref="EdgeDestinationSelectionExpression"/> class.
         /// </summary>
         /// <param name="fromNode">The from node to add to the edge.</param>
-        /// <param name="graph">The graph.</param>
-        public EdgeDestinationSelectionExpression(INodeTarget fromNode, IGraph graph)
+        /// <param name="graphContainer">The graph container.</param>
+        public EdgeDestinationSelectionExpression(INodeTarget fromNode, IGraphContainer graphContainer)
         {
             this.fromNode = fromNode;
-            this.graph = graph;
+            this.graphContainer = graphContainer;
         }
 
         #endregion
@@ -49,11 +49,11 @@ namespace FluentDot.Expressions.Edges
         /// <param name="name">The name of the node to choose as the source of the edge.</param>
         /// <returns>The current expression instance.</returns>
         public IEdgeExpression ToNodeWithName(string name) {
-            var toNode = graph.NodeLookup.GetNodeByName(name);
+            var toNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByName(name);
 
             if (toNode == null) {
                 toNode = new GraphNode(name);
-                graph.AddNode(toNode);
+                graphContainer.AddNode(toNode);
             }
 
             return AddNode(new NodeTarget(toNode));
@@ -66,7 +66,7 @@ namespace FluentDot.Expressions.Edges
         /// <param name="tag">The tag to match.</param>
         /// <returns>The current expression instance.</returns>
         public IEdgeExpression ToNodeWithTag<T>(T tag) {
-            var toNode = graph.NodeLookup.GetNodeByTag(tag);
+            var toNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByTag(tag);
 
             if (toNode == null)
             {
@@ -83,7 +83,7 @@ namespace FluentDot.Expressions.Edges
         /// <param name="elementName">Name of the element.</param>
         /// <returns>The current expression instance.</returns>
         public IEdgeExpression ToRecordWithName(string name, string elementName) {
-            var toNode = graph.NodeLookup.GetNodeByName(name);
+            var toNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByName(name);
 
             if (toNode == null) {
                 throw new ArgumentException("Could not find node with name " + name, "name");
@@ -111,7 +111,7 @@ namespace FluentDot.Expressions.Edges
         /// <returns>The current expression instance.</returns>
         public IEdgeExpression ToRecordWithTag<T>(T tag, string elementName) {
 
-            var toNode = graph.NodeLookup.GetNodeByTag(tag);
+            var toNode = graphContainer.GraphBuilder.NodeLookup.GetNodeByTag(tag);
 
             if (toNode == null) {
                 throw new ArgumentException("Could not find node with tag " + tag, "tag");
@@ -149,7 +149,7 @@ namespace FluentDot.Expressions.Edges
         public IEdgeExpression ToNewNode(string nodeName, Action<INodeExpression> nodeConfiguration)
         {
             var toNode = new GraphNode(nodeName);
-            graph.AddNode(toNode);
+            graphContainer.AddNode(toNode);
             
             if (nodeConfiguration != null)
             {
@@ -172,7 +172,7 @@ namespace FluentDot.Expressions.Edges
 
             IEdge edge;
 
-            if (graph.Type == GraphType.Directed) 
+            if (graphContainer.Type == GraphType.Directed) 
             {
                 edge = new DirectedEdge(fromNode, toNode);
             } 
@@ -181,7 +181,7 @@ namespace FluentDot.Expressions.Edges
                 edge = new UndirectedEdge(fromNode, toNode);
             }
 
-            graph.AddEdge(edge);
+            graphContainer.AddEdge(edge);
 
             return new EdgeExpression(edge);
         }

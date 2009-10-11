@@ -6,6 +6,8 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
+using System.Drawing;
+
 namespace FluentDot.Entities.Graphs
 {
     /// <summary>
@@ -13,5 +15,10 @@ namespace FluentDot.Entities.Graphs
     /// </summary>
     public interface ICluster : ISubGraph {
 
+        /// <summary>
+        /// Gets or sets the color of the background.
+        /// </summary>
+        /// <value>The color of the background.</value>
+        Color? BackgroundColor { get; set; }
     }
 }

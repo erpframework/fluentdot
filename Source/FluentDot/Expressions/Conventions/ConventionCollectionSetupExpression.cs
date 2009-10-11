@@ -6,8 +6,8 @@
  of the license can be found at http://www.gnu.org/copyleft/lesser.html.
 */
 
-using System;
 using FluentDot.Conventions;
+using FluentDot.Entities.Graphs;
 
 namespace FluentDot.Expressions.Conventions
 {
@@ -18,7 +18,7 @@ namespace FluentDot.Expressions.Conventions
     {
         #region Globals
 
-        private readonly IConventionTracker conventionTracker;
+        private readonly IGraph graph;
 
         #endregion
 
@@ -27,48 +27,25 @@ namespace FluentDot.Expressions.Conventions
         /// <summary>
         /// Initializes a new instance of the <see cref="ConventionCollectionSetupExpression"/> class.
         /// </summary>
-        /// <param name="conventionTracker">The convention tracker.</param>
-        public ConventionCollectionSetupExpression(IConventionTracker conventionTracker)
+        /// <param name="graph">The graph.</param>
+        public ConventionCollectionSetupExpression(IGraph graph)
         {
-            this.conventionTracker = conventionTracker;
+            this.graph = graph;
         }
 
         #endregion
 
         #region IConventionCollectionSetupExpression Members
-
-        /// <summary>
-        /// Adds the specified type as a convention.
-        /// </summary>
-        /// <typeparam name="T">The type of convention to add.</typeparam>
-        /// <returns>The current expression instance.</returns>
-        public IConventionCollectionSetupExpression AddType<T>() where T : IConvention, new()
-        {
-            var instance = new T();
-            AddInstance(instance);
-            return this;
-        }
-
+        
         /// <summary>
         /// Adds the specified convention instance to the collection.
         /// </summary>
         /// <typeparam name="T">The type of convention to add.</typeparam>
         /// <param name="instance">The instance of the convention to add.</param>
         /// <returns>The current expression instance.</returns>
-        public IConventionCollectionSetupExpression AddInstance<T>(T instance) where T : IConvention
+        public IConventionCollectionSetupExpression Add<T>(IConvention<T> instance)
         {
-            if (typeof(INodeConvention).IsAssignableFrom(typeof(T))) 
-            {
-                conventionTracker.AddConvention((INodeConvention)Activator.CreateInstance<T>());
-            } 
-            else if (typeof(IEdgeConvention).IsAssignableFrom(typeof(T))) 
-            {
-                conventionTracker.AddConvention((IEdgeConvention)Activator.CreateInstance<T>());
-            } 
-            else {
-                throw new ArgumentException("Conventions can only be of type INodeConvention or IEdgeConvention.");
-            }
-
+            graph.AddConvention(instance);
             return this;
         }
 
